@@ -1,0 +1,74 @@
+[
+    {
+        "id": 1,
+        "admin": "Junaed",
+        "item": "Biriyani",
+        "ingredients": "Rice,Meat,Spices",
+        "post_time": "2023-07-07",
+        "rating": 7,
+        "like": 3,
+        "reviews": "2",
+        "type": "lunch",
+        "image": "https://ikkaskitchen.com.au/cdn/shop/products/goat_91f3f091-da4f-440c-9df8-8e0ff52af7e4.jpg?v=1640588550"
+    },
+    {
+        "id": 2,
+        "admin": "Junaed",
+        "item": "Ilish Polao",
+        "ingredients": "Rice,Ilish",
+        "post_time": "2023-07-07",
+        "rating": 7,
+        "like": 3,
+        "reviews": "2",
+        "type": "lunch",
+        "image": "https://4.bp.blogspot.com/-iKoHnLrQ4No/T-d7q4Fz_7I/AAAAAAAAAZk/Vbh12KVdkvc/s1600/ilish_polao.JPG"
+    },
+    {
+        "id": 3,
+        "admin": "Junaed",
+        "item": "Chingri Malai Curry",
+        "ingredients": "Shrimp,Malai",
+        "post_time": "2023-07-07",
+        "rating": 7,
+        "like": 3,
+        "reviews": "2",
+        "type": "dinner",
+        "image": "https://slurrp.club/wp-content/uploads/2017/09/DSC_1891.jpg"
+    },
+    {
+        "id": 4,
+        "admin": "Junaed",
+        "item": "Kebab",
+        "ingredients": "Meat,Paratha",
+        "post_time": "2023-07-07",
+        "rating": 7,
+        "like": 3,
+        "reviews": "2",
+        "type": "dinner",
+        "image": "https://qph.cf2.quoracdn.net/main-qimg-36c9dc8edffe088f56141dc23d100e41-lq"
+    },
+    {
+        "id": 5,
+        "admin": "Junaed",
+        "item": "Pizza",
+        "ingredients": "Cheese,Meat,Toppings",
+        "post_time": "2023-07-07",
+        "rating": 7,
+        "like": 3,
+        "reviews": "2",
+        "type": "breakfast",
+        "image": "https://www.healthyseasonalrecipes.com/wp-content/uploads/2019/12/greek-pizza-21-001.jpg"
+    },
+    {
+        "id": 6,
+        "admin": "Junaed",
+        "item": "Roshogolla",
+        "ingredients": "Sweets",
+        "post_time": "2023-07-07",
+        "rating": 7,
+        "like": 3,
+        "reviews": "2",
+        "type": "breakfast",
+        "image": "https://sgp1.digitaloceanspaces.com/cosmosgroup-dc/news/qqwYxlIFK9HiYbgQj1uWjvT11UgYs3IsCj5gD3dc.jpeg"
+    }
+]

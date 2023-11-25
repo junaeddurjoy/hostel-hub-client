@@ -6,11 +6,7 @@ import { MdAddToPhotos } from "react-icons/md";
 import { IoIosWallet } from "react-icons/io";
 import { IoFastFoodOutline } from "react-icons/io5";
 import { MdOutlineUpcoming } from "react-icons/md";
-import { RiAdminFill } from "react-icons/ri";
-import { Authcontext } from "../../providers/Authprovider";
-import { useContext } from "react";
-const AdminDashboard = () => {
-    const { user } = useContext(Authcontext);
+const ManageUsers = () => {
     return (
         <div>
             <div className="w-full flex">
@@ -27,7 +23,7 @@ const AdminDashboard = () => {
                     </ul>
                 </div>
                 <div className="w-5/6">
-                    <div className="hero justify-start">
+                    {/* <div className="hero justify-start">
                         <div className="hero-content flex-col lg:flex-row">
                             <img src={user?.photoURL} className="h-60 w-60 rounded-lg shadow-2xl" />
                             <div>
@@ -37,11 +33,11 @@ const AdminDashboard = () => {
                                 <h1 className="text-5xl font-bold flex gap-5"><RiAdminFill />Admin</h1>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
     );
 };
 
-export default AdminDashboard;
+export default ManageUsers;

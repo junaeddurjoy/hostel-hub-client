@@ -107,7 +107,7 @@ const Navbar = () => {
                             }
                             {
                                 dbRole.role == 'admin' &&
-                                <li className="text-lg font-semibold hover:text-2xl">Admin Dashboard</li>
+                                <Link to={'/admindashboard'}><li className="text-lg font-semibold hover:text-2xl">Admin Dashboard</li></Link>
                             }
                             {
                                 user ?

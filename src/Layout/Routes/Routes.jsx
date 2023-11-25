@@ -11,6 +11,12 @@ import AdminDashboard from "../Pages/AdminDashboard";
 import CheckOut from "../Pages/CheckOut";
 import RequestedMeals from "../Pages/RequestedMeals";
 import MyReviews from "../Pages/MyReviews";
+import ManageUsers from "../Pages/ManageUsers";
+import AddMeal from "../Pages/AddMeal";
+import AllMeal from "../Pages/AllMeal";
+import AllReviews from "../Pages/AllReviews";
+import ServeMeal from "../Pages/ServeMeal";
+import UpcomingMealDashboard from "../Pages/UpcomingMealDashboard";
 
 export const router = createBrowserRouter([
   {
@@ -61,6 +67,30 @@ export const router = createBrowserRouter([
       {
         path: "/myreviews",
         element: <MyReviews></MyReviews>,
+      },
+      {
+        path: "/addmeal",
+        element: <AddMeal></AddMeal>,
+      },
+      {
+        path: "/allmeal",
+        element: <AllMeal></AllMeal>,
+      },
+      {
+        path: "/allreviews",
+        element: <AllReviews></AllReviews>,
+      },
+      {
+        path: "/servemeal",
+        element: <ServeMeal></ServeMeal>,
+      },
+      {
+        path: "/upcomingmealdashboard",
+        element: <UpcomingMealDashboard></UpcomingMealDashboard>,
+      },
+      {
+        path: "/manageusers",
+        element: <ManageUsers></ManageUsers>,
       },
     ]
   },

@@ -22,6 +22,26 @@ const Login = () => {
                 console.log(loggedinuser);
                 setUser(loggedinuser)
                 navigate(location?.state ? location.state : '/')
+
+
+                let membership = 'bronze';
+                let name = loggedinuser.displayName;
+                let email = loggedinuser.email;
+                let role = 'user';
+                const newUser = { name, email, membership, role }
+                let gg = fetch('http://localhost:5000/user');
+                print('5555555555555555555555555555555',gg);
+                fetch('http://localhost:5000/user', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(newUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+
+                    })
             })
             .catch(error => {
                 console.log('error', error.message)

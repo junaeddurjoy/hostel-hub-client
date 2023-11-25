@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { getAuth, updateProfile } from "firebase/auth";
 import { Authcontext } from "../../providers/Authprovider";
-
+import Swal from 'sweetalert2'
 const Registration = () => {
     const { createUser } = useContext(Authcontext);
     const [regError, setregError] = useState('');
@@ -42,7 +42,43 @@ const Registration = () => {
                     displayName: displayName, photoURL: photoURL
                 }).then(() => {
                     navigate(location?.state ? location.state : '/')
-                    console.log("user updated")
+                    // add membership to database
+                    let membership='bronze';
+                    let role='user';
+                    const newUser = {displayName, email, membership, role }
+                    fetch('http://localhost:5000/user', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(newUser)
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            // console.log(data);
+                            // if (data.insertedId) {
+                            //     Swal.fire({
+                            //         title: 'Success!',
+                            //         text: 'Job Added Successfully',
+                            //         icon: 'success',
+                            //         confirmButtonText: 'Cool'
+                            //     })
+                            //     console.log('added');
+                            // }
+                        })
+                    // add membership to database
+                    // dashboard user and admin
+                    // user dash: request,review,profile
+                    // checkout for user only
+                    // database update
+                    // database update
+                    // database update
+                    // database update
+                    // database update
+                    // database update
+                    // database update
+                    // database update
+
                 }).catch((error) => {
                     // console.log(error);
                 });

@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { getAuth, updateProfile } from "firebase/auth";
 import { Authcontext } from "../../providers/Authprovider";
 
@@ -8,7 +8,8 @@ const Registration = () => {
     const { createUser } = useContext(Authcontext);
     const [regError, setregError] = useState('');
     const [regSuccess, setregSuccess] = useState('');
-
+    const location = useLocation();
+    const navigate = useNavigate();
     const handleRegister = event => {
         event.preventDefault();
         const form = new FormData(event.currentTarget);
@@ -40,8 +41,7 @@ const Registration = () => {
                 updateProfile(auth.currentUser, {
                     displayName: displayName, photoURL: photoURL
                 }).then(() => {
-                    // Profile updated!
-                    // ...
+                    navigate(location?.state ? location.state : '/')
                     console.log("user updated")
                 }).catch((error) => {
                     // console.log(error);

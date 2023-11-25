@@ -21,6 +21,7 @@ const Login = () => {
                 const loggedinuser = result.user;
                 console.log(loggedinuser);
                 setUser(loggedinuser)
+                navigate(location?.state ? location.state : '/')
             })
             .catch(error => {
                 console.log('error', error.message)

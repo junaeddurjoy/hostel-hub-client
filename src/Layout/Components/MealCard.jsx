@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 /* eslint-disable react/prop-types */
 const MealCard = ({ meal }) => {
     const { _id, item, image, ingredients,post_time } = meal;
-    console.log(_id);
     return (
         <>
             {

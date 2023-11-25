@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Authcontext } from "../../providers/Authprovider";
-import { TbLogin, TbLogin2} from "react-icons/tb";
+import { TbLogin, TbLogin2 } from "react-icons/tb";
 
 const Navbar = () => {
     const { user, logout } = useContext(Authcontext);
@@ -12,6 +12,23 @@ const Navbar = () => {
             .then()
             .catch()
     }
+
+    const [dbUsers, setdbUsers] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:5000/user')
+            .then(res => res.json())
+            .then(data => setdbUsers(data));
+    }, [])
+    let dbRole = '';
+    const matched = dbUsers.map(dbUser => {
+        const { email } = dbUser;
+        console.log(email);
+        if (email == user?.email) {
+            const { role } = dbUser;
+            dbRole = {role};
+        }
+    })
+    console.log(dbRole.role);
     return (
         <div>
             <div className="navbar bg-base-200">
@@ -78,7 +95,17 @@ const Navbar = () => {
                                     <li className="text-lg font-semibold hover:text-2xl">User Name</li>
 
                             }
-                            <li className="text-lg font-semibold hover:text-2xl">Dashboard</li>
+                            {
+
+                            }
+                            {
+                                dbRole.role == 'user' &&
+                                <li className="text-lg font-semibold hover:text-2xl">User Dashboard</li>
+                            }
+                            {
+                                dbRole.role == 'admin' &&
+                                <li className="text-lg font-semibold hover:text-2xl">Admin Dashboard</li>
+                            }
                             {
                                 user ?
                                     <Link to={'/login'}>

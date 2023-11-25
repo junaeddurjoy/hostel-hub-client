@@ -10,7 +10,6 @@ const Login = () => {
     const [user, setUser] = useState(null);
     const [loginError, setloginError] = useState('')
     const location = useLocation();
-    console.log(location);
     const navigate = useNavigate();
 
     const auth = getAuth(app);

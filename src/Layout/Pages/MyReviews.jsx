@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { IoPersonAddOutline } from "react-icons/io5";
 import { MdOutlineRateReview } from "react-icons/md";
+import { FaHeart } from "react-icons/fa";
+import { MdRateReview } from "react-icons/md";
 const MyReviews = () => {
     return (
         <div className="w-full flex">
@@ -13,7 +15,49 @@ const MyReviews = () => {
                 </ul>
             </div>
             <div className="w-5/6">
-                rev
+                <div className="overflow-x-auto">
+                    <table className="table">
+                        {/* head */}
+                        <thead>
+                            <tr>
+                                <th className="text-xl font-bold">Meal Title</th>
+                                <th className="text-xl font-bold ">Likes</th>
+                                <th className="text-xl font-bold">Review</th>
+                                <th className="text-xl font-bold  pl-24">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {/* row 1 */}
+                            <tr>
+                                <td>
+                                    <div className="flex items-center gap-3">
+                                        <div className="avatar">
+                                            <div className="mask mask-squircle w-20 h-20">
+                                                <img src="https://www.kannammacooks.com/wp-content/uploads/chettinadu-chicken-biriyani-1-3.jpg" alt="Avatar Tailwind CSS Component" />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div className="font-bold text-xl">Biriyani</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td className="text-lg">
+                                    <p className="py-6 px-5 font-semibold list-disc flex items-center text-red-500"><FaHeart className="text-2xl" />7</p>
+                                </td>
+                                <td className="text-lg">
+                                    <p className="py-6 px-5 font-semibold list-disc flex items-center text-purple-600"><MdRateReview className="text-2xl" />8</p>
+                                </td>
+                                <td>
+                                    <div className="join join-vertical lg:join-horizontal">
+                                        <button className="btn join-item text-xl font-semibold bg-purple-500">Edit</button>
+                                        <button className="btn join-item text-xl font-semibold bg-red-500">Delete</button>
+                                        <button className="btn join-item text-xl font-semibold bg-green-500">View</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     );

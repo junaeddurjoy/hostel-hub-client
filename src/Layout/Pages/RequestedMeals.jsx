@@ -3,6 +3,8 @@ import { CgProfile } from "react-icons/cg";
 import { IoPersonAddOutline } from "react-icons/io5";
 import { MdOutlineRateReview } from "react-icons/md";
 import { MdCancel } from "react-icons/md";
+import { FaHeart } from "react-icons/fa";
+import { MdRateReview } from "react-icons/md";
 const RequestedMeals = () => {
     return (
         <div className="w-full flex">
@@ -19,9 +21,10 @@ const RequestedMeals = () => {
                         {/* head */}
                         <thead>
                             <tr>
-                                <th className="text-xl font-bold">Item</th>
-                                <th className="text-xl font-bold ">Ingredients</th>
-                                <th className="text-xl font-bold">Type</th>
+                                <th className="text-xl font-bold">Meal Title</th>
+                                <th className="text-xl font-bold ">Likes</th>
+                                <th className="text-xl font-bold">Review</th>
+                                <th className="text-xl font-bold">Status</th>
                                 <th className="text-xl font-bold">Action</th>
                             </tr>
                         </thead>
@@ -41,12 +44,17 @@ const RequestedMeals = () => {
                                     </div>
                                 </td>
                                 <td className="text-lg">
-                                    Meat,Rice
+                                    <p className="py-6 px-5 font-semibold list-disc flex items-center text-red-500"><FaHeart className="text-2xl" />7</p>
                                 </td>
-                                <td className="text-lg">Lunch</td>
-                                <th>
+                                <td className="text-lg">
+                                    <p className="py-6 px-5 font-semibold list-disc flex items-center text-purple-600"><MdRateReview className="text-2xl" />8</p>
+                                </td>
+                                <td className="text-lg">
+                                    <p className="py-6 px-5 font-semibold list-disc -ml-5">Pending</p>
+                                </td>
+                                <td>
                                     <button className="btn btn-ghost btn-md"><MdCancel className="text-3xl text-red-600" /></button>
-                                </th>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

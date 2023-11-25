@@ -6,6 +6,11 @@ import Meals from "../Pages/Meals";
 import MealDetails from "../Components/MealDetails";
 import Login from "../Pages/Login";
 import Registration from "../Pages/Registration";
+import UserDashboard from "../Pages/UserDashboard";
+import AdminDashboard from "../Pages/AdminDashboard";
+import CheckOut from "../Pages/CheckOut";
+import RequestedMeals from "../Pages/RequestedMeals";
+import MyReviews from "../Pages/MyReviews";
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +41,26 @@ export const router = createBrowserRouter([
       {
         path: "/registration",
         element: <Registration></Registration>,
+      },
+      {
+        path: "/userdashboard",
+        element: <UserDashboard></UserDashboard>,
+      },
+      {
+        path: "/admindashboard",
+        element: <AdminDashboard></AdminDashboard>,
+      },
+      {
+        path: "/checkout",
+        element: <CheckOut></CheckOut>,
+      },
+      {
+        path: "/requestedmeals",
+        element: <RequestedMeals></RequestedMeals>,
+      },
+      {
+        path: "/myreviews",
+        element: <MyReviews></MyReviews>,
       },
     ]
   },

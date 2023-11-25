@@ -55,29 +55,11 @@ const Registration = () => {
                     })
                         .then(res => res.json())
                         .then(data => {
-                            // console.log(data);
-                            // if (data.insertedId) {
-                            //     Swal.fire({
-                            //         title: 'Success!',
-                            //         text: 'Job Added Successfully',
-                            //         icon: 'success',
-                            //         confirmButtonText: 'Cool'
-                            //     })
-                            //     console.log('added');
-                            // }
                         })
-                    // add membership to database
+
                     // dashboard user and admin
                     // user dash: request,review,profile
                     // checkout for user only
-                    // database update
-                    // database update
-                    // database update
-                    // database update
-                    // database update
-                    // database update
-                    // database update
-                    // database update
 
                 }).catch((error) => {
                     // console.log(error);

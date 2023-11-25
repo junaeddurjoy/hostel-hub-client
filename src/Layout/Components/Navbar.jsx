@@ -28,7 +28,6 @@ const Navbar = () => {
             dbRole = {role};
         }
     })
-    console.log(dbRole.role);
     return (
         <div>
             <div className="navbar bg-base-200">
@@ -100,7 +99,11 @@ const Navbar = () => {
                             }
                             {
                                 dbRole.role == 'user' &&
-                                <li className="text-lg font-semibold hover:text-2xl">User Dashboard</li>
+                                <Link to={'/userdashboard'}><li className="text-lg font-semibold hover:text-2xl">User Dashboard</li></Link>
+                            }
+                            {
+                                dbRole.role == 'user' &&
+                                <Link to={'/checkout'}><li className="text-lg font-semibold hover:text-2xl">Checkout</li></Link>
                             }
                             {
                                 dbRole.role == 'admin' &&

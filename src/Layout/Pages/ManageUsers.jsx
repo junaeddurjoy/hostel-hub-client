@@ -23,17 +23,40 @@ const ManageUsers = () => {
                     </ul>
                 </div>
                 <div className="w-5/6">
-                    {/* <div className="hero justify-start">
-                        <div className="hero-content flex-col lg:flex-row">
-                            <img src={user?.photoURL} className="h-60 w-60 rounded-lg shadow-2xl" />
-                            <div>
-                                <h1 className="text-5xl font-bold">{user?.displayName}</h1>
-                                <br />
-                                
-                                <h1 className="text-5xl font-bold flex gap-5"><RiAdminFill />Admin</h1>
-                            </div>
-                        </div>
-                    </div> */}
+                    <div className="overflow-x-auto">
+                        <table className="table">
+                            {/* head */}
+                            <thead>
+                                <tr>
+                                    <th className="text-xl font-bold">User Name</th>
+                                    <th className="text-xl font-bold ">User Email</th>
+                                    <th className="text-xl font-bold">Subscription Status</th>
+                                    <th className="text-xl font-bold">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {/* row 1 */}
+                                <tr>
+                                    <td>
+                                        <div className="flex items-center gap-3">
+                                            <div className="font-bold text-xl">Junaed</div>
+                                        </div>
+                                    </td>
+                                    <td className="text-lg">
+                                        <p className="py-6 px-5 font-semibold">juaned@gmail.com</p>
+                                    </td>
+                                    <td className="text-lg">
+                                        <p className="py-6 px-5 font-semibold list-disc flex items-center">user</p>
+                                    </td>
+                                    <td>
+                                        <div className="join join-vertical lg:join-horizontal">
+                                            <button className="btn join-item text-xl font-semibold bg-black text-white">Make Admin</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

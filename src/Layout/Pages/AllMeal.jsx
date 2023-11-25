@@ -6,6 +6,8 @@ import { MdAddToPhotos } from "react-icons/md";
 import { IoIosWallet } from "react-icons/io";
 import { IoFastFoodOutline } from "react-icons/io5";
 import { MdOutlineUpcoming } from "react-icons/md";
+import { FaHeart } from "react-icons/fa";
+import { MdRateReview } from "react-icons/md";
 const AllMeal = () => {
     return (
         <div>
@@ -23,17 +25,53 @@ const AllMeal = () => {
                     </ul>
                 </div>
                 <div className="w-5/6">
-                    {/* <div className="hero justify-start">
-                        <div className="hero-content flex-col lg:flex-row">
-                            <img src={user?.photoURL} className="h-60 w-60 rounded-lg shadow-2xl" />
-                            <div>
-                                <h1 className="text-5xl font-bold">{user?.displayName}</h1>
-                                <br />
-                                
-                                <h1 className="text-5xl font-bold flex gap-5"><RiAdminFill />Admin</h1>
-                            </div>
-                        </div>
-                    </div> */}
+                    <div className="overflow-x-auto">
+                        <table className="table">
+                            {/* head */}
+                            <thead>
+                                <tr>
+                                    <th className="text-xl font-bold">Meal Title</th>
+                                    <th className="text-xl font-bold ">Likes</th>
+                                    <th className="text-xl font-bold">Reviews</th>
+                                    <th className="text-xl font-bold">Distributor</th>
+                                    <th className="text-xl font-bold">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {/* row 1 */}
+                                <tr>
+                                    <td>
+                                        <div className="flex items-center gap-3">
+                                            <div className="avatar">
+                                                <div className="mask mask-squircle w-20 h-20">
+                                                    <img src="https://www.kannammacooks.com/wp-content/uploads/chettinadu-chicken-biriyani-1-3.jpg" alt="Avatar Tailwind CSS Component" />
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div className="font-bold text-xl">Biriyani</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td className="text-lg">
+                                        <p className="py-6 px-5 font-semibold list-disc flex items-center text-red-500"><FaHeart className="text-2xl" />7</p>
+                                    </td>
+                                    <td className="text-lg">
+                                        <p className="py-6 px-5 font-semibold list-disc flex items-center text-purple-600"><MdRateReview className="text-2xl" />8</p>
+                                    </td>
+                                    <td>
+                                        <div className="font-bold text-xl">Junaed</div>
+                                    </td>
+                                    <td>
+                                        <div className="join join-vertical lg:join-horizontal">
+                                            <button className="btn join-item text-xl font-semibold bg-purple-500">Update</button>
+                                            <button className="btn join-item text-xl font-semibold bg-red-500">Delete</button>
+                                            <button className="btn join-item text-xl font-semibold bg-green-500">View</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

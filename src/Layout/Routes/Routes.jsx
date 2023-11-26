@@ -19,6 +19,7 @@ import ServeMeal from "../Pages/ServeMeal";
 import UpcomingMealDashboard from "../Pages/UpcomingMealDashboard";
 import UpdateUser from "../Pages/UpdateUser";
 import UpdateMeal from "../Pages/UpdateMeal";
+import PrivateRoutes from "../../PrivateRoutes";
 
 export const router = createBrowserRouter([
   {
@@ -52,56 +53,56 @@ export const router = createBrowserRouter([
       },
       {
         path: "/userdashboard",
-        element: <UserDashboard></UserDashboard>,
+        element: <PrivateRoutes><UserDashboard></UserDashboard></PrivateRoutes>,
       },
       {
         path: "/admindashboard",
-        element: <AdminDashboard></AdminDashboard>,
+        element: <PrivateRoutes><AdminDashboard></AdminDashboard></PrivateRoutes>,
       },
       {
         path: "/checkout",
-        element: <CheckOut></CheckOut>,
+        element: <PrivateRoutes><CheckOut></CheckOut></PrivateRoutes>,
       },
       {
         path: "/requestedmeals",
-        element: <RequestedMeals></RequestedMeals>,
+        element: <PrivateRoutes><RequestedMeals></RequestedMeals></PrivateRoutes>,
       },
       {
         path: "/myreviews",
-        element: <MyReviews></MyReviews>,
+        element: <PrivateRoutes><MyReviews></MyReviews></PrivateRoutes>,
       },
       {
         path: "/addmeal",
-        element: <AddMeal></AddMeal>,
+        element: <PrivateRoutes><AddMeal></AddMeal></PrivateRoutes>,
       },
       {
         path: "/allmeal",
-        element: <AllMeal></AllMeal>,
+        element: <PrivateRoutes><AllMeal></AllMeal></PrivateRoutes>,
       },
       {
         path: "/allreviews",
-        element: <AllReviews></AllReviews>,
+        element: <PrivateRoutes><AllReviews></AllReviews></PrivateRoutes>,
       },
       {
         path: "/servemeal",
-        element: <ServeMeal></ServeMeal>,
+        element: <PrivateRoutes> <ServeMeal></ServeMeal></PrivateRoutes>,
       },
       {
         path: "/upcomingmealdashboard",
-        element: <UpcomingMealDashboard></UpcomingMealDashboard>,
+        element: <PrivateRoutes><UpcomingMealDashboard></UpcomingMealDashboard></PrivateRoutes>,
       },
       {
         path: "/manageusers",
-        element: <ManageUsers></ManageUsers>,
+        element: <PrivateRoutes><ManageUsers></ManageUsers></PrivateRoutes>,
       },
       {
         path: "/updateuser/:id",
-        element: <UpdateUser></UpdateUser>,
+        element: <PrivateRoutes><UpdateUser></UpdateUser></PrivateRoutes>,
         loader: ({ params }) => fetch(`http://localhost:5000/user/${params.id}`)
       },
       {
         path: "/updatemeal/:id",
-        element: <UpdateMeal></UpdateMeal>,
+        element: <PrivateRoutes><UpdateMeal></UpdateMeal></PrivateRoutes>,
         loader: ({ params }) => fetch(`http://localhost:5000/meal/${params.id}`)
       },
     ]

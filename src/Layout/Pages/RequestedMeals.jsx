@@ -8,39 +8,45 @@ import { FaHeart } from "react-icons/fa";
 import { MdRateReview } from "react-icons/md";
 import { useContext, useEffect, useState } from "react";
 import { Authcontext } from "../../providers/Authprovider";
+import Swal from 'sweetalert2'
 const RequestedMeals = () => {
     const { user } = useContext(Authcontext);
 
-
-    const [dbUsers, setdbUsers] = useState([]);
-    useEffect(() => {
-        fetch('http://localhost:5000/user')
-            .then(res => res.json())
-            .then(data => setdbUsers(data));
-    }, []);
     const [dbMeal, setdbMeal] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/meal')
+        fetch('http://localhost:5000/request')
             .then(res => res.json())
             .then(data => setdbMeal(data));
     }, []);
 
-    const foodList = [];
-    const matched = dbUsers.map(dbUser => {
-        const { email } = dbUser;
-        if (email == user?.email) {
-            console.log(dbUser.food);
-            for (let i = 0; i < dbUser.food.length; i++) {
-                let foodId = dbUser.food[i];
-                const matchedFood = dbMeal.map(dbFood => {
-                    if (dbFood._id == foodId) {
-                        foodList.push(dbFood);
-                    }
+
+
+    const [meals, setMeals] = useState([]);
+    const handleDelete = id => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/request/${id}`, {
+                    method: 'DELETE'
                 })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.deletedCount > 0) {
+                            const remaining = meals.filter(food => food._id !== id);
+                            setMeals(remaining);
+                            location.reload();
+                        }
+                    })
             }
-        }
-    })
-    console.log('foooooooooooooooooooooooooooo',foodList);
+        })
+    }
     return (
         <div className="w-full flex">
             <div className="w-1/6 bg-gray-200">
@@ -65,32 +71,38 @@ const RequestedMeals = () => {
                         </thead>
                         <tbody>
                             {
-                                foodList.map(meal =>
+                                dbMeal.map(meal =>
                                     <tr key={meal._id}>
-                                        <td>
-                                            <div className="flex items-center gap-3">
-                                                <div className="avatar">
-                                                    <div className="mask mask-squircle w-20 h-20">
-                                                        <img src={meal.image} alt="Avatar Tailwind CSS Component" />
+                                        {
+                                            meal.email == user?.email &&
+                                            <>
+
+                                                <td>
+                                                    <div className="flex items-center gap-3">
+                                                        <div className="avatar">
+                                                            <div className="mask mask-squircle w-20 h-20">
+                                                                <img src={meal.image} alt="Avatar Tailwind CSS Component" />
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <div className="font-bold text-xl">{meal.item}</div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div>
-                                                    <div className="font-bold text-xl">{meal.item}</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td className="text-lg">
-                                            <p className="py-6 px-5 font-semibold list-disc flex items-center text-red-500"><FaHeart className="text-2xl" />{meal.like}</p>
-                                        </td>
-                                        <td className="text-lg">
-                                            <p className="py-6 px-5 font-semibold list-disc flex items-center text-purple-600"><MdRateReview className="text-2xl" />{meal.reviews}</p>
-                                        </td>
-                                        <td className="text-lg">
-                                            <p className="py-6 px-5 font-semibold list-disc -ml-5">Pending</p>
-                                        </td>
-                                        <td>
-                                            <button className="btn btn-ghost btn-md"><MdCancel className="text-3xl text-red-600" /></button>
-                                        </td>
+                                                </td>
+                                                <td className="text-lg">
+                                                    <p className="py-6 px-5 font-semibold list-disc flex items-center text-red-500"><FaHeart className="text-2xl" />{meal.like}</p>
+                                                </td>
+                                                <td className="text-lg">
+                                                    <p className="py-6 px-5 font-semibold list-disc flex items-center text-purple-600"><MdRateReview className="text-2xl" />{meal.reviews}</p>
+                                                </td>
+                                                <td className="text-lg">
+                                                    <p className="py-6 px-5 font-semibold list-disc -ml-5">Pending</p>
+                                                </td>
+                                                <td>
+                                                    <button onClick={() => handleDelete(meal._id)} className="btn btn-ghost btn-md"><MdCancel className="text-3xl text-red-600" /></button>
+                                                </td>
+                                            </>
+                                        }
                                     </tr>)
                             }
                         </tbody>

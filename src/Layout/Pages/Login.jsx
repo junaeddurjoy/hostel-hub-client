@@ -25,8 +25,8 @@ const Login = () => {
                 let name = loggedinuser.displayName;
                 let email = loggedinuser.email;
                 let role = 'user';
-                let food = [];
-                const newUser = { name, email, membership, role, food }
+           
+                const newUser = { name, email, membership, role}
                 fetch('http://localhost:5000/user', {
                     method: 'POST',
                     headers: {

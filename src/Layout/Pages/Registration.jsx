@@ -45,8 +45,8 @@ const Registration = () => {
                     // add membership to database
                     let membership='bronze';
                     let role='user';
-                    let food=[];
-                    const newUser = {displayName, email, membership, role, food }
+                 
+                    const newUser = {displayName, email, membership, role }
                     fetch('http://localhost:5000/user', {
                         method: 'POST',
                         headers: {
@@ -55,8 +55,7 @@ const Registration = () => {
                         body: JSON.stringify(newUser)
                     })
                         .then(res => res.json())
-                        .then(data => {
-                        })
+                        .then(data => {})
 
                     // dashboard user and admin
                     // user dash: request,review,profile

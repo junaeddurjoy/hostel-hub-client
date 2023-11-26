@@ -21,32 +21,29 @@ const MealDetails = () => {
             .then(res => res.json())
             .then(data => setdbUsers(data));
     }, []);
-    let membership = 'silver';
-    const updatedApply = { food_id};
+
+    let email = user?.email;
+    const updatedReqApply = { image, item, type, ingredients, rating, like, reviews,email };
     const handleMealRequest = event => {
         event.preventDefault();
         const matched = dbUsers.map(dbUser => {
             const { email } = dbUser;
             if (email == user?.email) {
-                fetch(`http://localhost:5000/user/${dbUser._id}`, {
-                    method: 'PUT',
+                fetch('http://localhost:5000/request', {
+                    method: 'POST',
                     headers: {
                         'content-type': 'application/json'
                     },
-                    body: JSON.stringify(updatedApply)
+                    body: JSON.stringify(updatedReqApply)
                 })
                     .then(res => res.json())
                     .then(data => {
-                        console.log(data);
-                        if (data.modifiedCount > 0) {
-                            Swal.fire({
-                                title: 'Success!',
-                                text: 'Meal Requested',
-                                icon: 'success',
-                                confirmButtonText: 'Cool'
-                            })
-                            console.log('updated');
-                        }
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'Meal Requested',
+                            icon: 'success',
+                            confirmButtonText: 'Cool'
+                        })
                     })
             }
         })

@@ -10,35 +10,13 @@ import { Authcontext } from "../../providers/Authprovider";
 const MyReviews = () => {
     const { user } = useContext(Authcontext);
 
-
-    const [dbUsers, setdbUsers] = useState([]);
-    useEffect(() => {
-        fetch('http://localhost:5000/user')
-            .then(res => res.json())
-            .then(data => setdbUsers(data));
-    }, []);
     const [dbMeal, setdbMeal] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/meal')
+        fetch('http://localhost:5000/request')
             .then(res => res.json())
             .then(data => setdbMeal(data));
     }, []);
 
-    const foodList = [];
-    const matched = dbUsers.map(dbUser => {
-        const { email } = dbUser;
-        if (email == user?.email) {
-            console.log(dbUser.food);
-            for (let i = 0; i < dbUser.food.length; i++) {
-                let foodId = dbUser.food[i];
-                const matchedFood = dbMeal.map(dbFood => {
-                    if (dbFood._id == foodId) {
-                        foodList.push(dbFood);
-                    }
-                })
-            }
-        }
-    })
     return (
         <div className="w-full flex">
             <div className="w-1/6 bg-gray-200">
@@ -62,34 +40,39 @@ const MyReviews = () => {
                         </thead>
                         <tbody>
                             {
-                               foodList.map(meal =>
-                                <tr key={meal._id}>
-                                    <td>
-                                        <div className="flex items-center gap-3">
-                                            <div className="avatar">
-                                                <div className="mask mask-squircle w-20 h-20">
-                                                    <img src={meal.image} alt="Avatar Tailwind CSS Component" />
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <div className="font-bold text-xl">{meal.item}</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td className="text-lg">
-                                        <p className="py-6 px-5 font-semibold list-disc flex items-center text-red-500"><FaHeart className="text-2xl" />{meal.like}</p>
-                                    </td>
-                                    <td className="text-lg">
-                                        <p className="py-6 px-5 font-semibold list-disc flex items-center text-purple-600"><MdRateReview className="text-2xl" />{meal.reviews}</p>
-                                    </td>
-                                    <td>
-                                        <div className="join join-vertical lg:join-horizontal">
-                                            <button className="btn join-item text-xl font-semibold bg-purple-500">Edit</button>
-                                            <button className="btn join-item text-xl font-semibold bg-red-500">Delete</button>
-                                            <button className="btn join-item text-xl font-semibold bg-green-500">View</button>
-                                        </div>
-                                    </td>
-                                </tr>)
+                                dbMeal.map(meal =>
+                                    <tr key={meal._id}>
+                                        {
+                                            meal.email == user?.email &&
+                                            <>
+                                                <td>
+                                                    <div className="flex items-center gap-3">
+                                                        <div className="avatar">
+                                                            <div className="mask mask-squircle w-20 h-20">
+                                                                <img src={meal.image} alt="Avatar Tailwind CSS Component" />
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <div className="font-bold text-xl">{meal.item}</div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td className="text-lg">
+                                                    <p className="py-6 px-5 font-semibold list-disc flex items-center text-red-500"><FaHeart className="text-2xl" />{meal.like}</p>
+                                                </td>
+                                                <td className="text-lg">
+                                                    <p className="py-6 px-5 font-semibold list-disc flex items-center text-purple-600"><MdRateReview className="text-2xl" />{meal.reviews}</p>
+                                                </td>
+                                                <td>
+                                                    <div className="join join-vertical lg:join-horizontal">
+                                                        <button className="btn join-item text-xl font-semibold bg-purple-500">Edit</button>
+                                                        <button className="btn join-item text-xl font-semibold bg-red-500">Delete</button>
+                                                        <button className="btn join-item text-xl font-semibold bg-green-500">View</button>
+                                                    </div>
+                                                </td>
+                                            </>
+                                        }
+                                    </tr>)
                             }
                         </tbody>
                     </table>

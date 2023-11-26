@@ -7,8 +7,41 @@ import { IoIosWallet } from "react-icons/io";
 import { IoFastFoodOutline } from "react-icons/io5";
 import { MdOutlineUpcoming } from "react-icons/md";
 import { IoMdStopwatch } from "react-icons/io";
-
+import { useEffect, useState } from "react";
+import Swal from 'sweetalert2'
 const ServeMeal = () => {
+    const [dbMeal, setdbMeal] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:5000/request')
+            .then(res => res.json())
+            .then(data => setdbMeal(data));
+    }, []);
+    const [meals, setMeals] = useState([]);
+    const handleDelete = id => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You want to serve this meal!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Serve it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/request/${id}`, {
+                    method: 'DELETE'
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.deletedCount > 0) {
+                            const remaining = meals.filter(food => food._id !== id);
+                            setMeals(remaining);
+                            location.reload();
+                        }
+                    })
+            }
+        })
+    }
     return (
         <div>
             <div className="w-full flex">
@@ -25,48 +58,47 @@ const ServeMeal = () => {
                     </ul>
                 </div>
                 <div className="w-5/6">
-                <div className="overflow-x-auto">
+                    <div className="overflow-x-auto">
                         <table className="table">
                             {/* head */}
                             <thead>
                                 <tr>
                                     <th className="text-xl font-bold">Meal Title</th>
                                     <th className="text-xl font-bold ">Email</th>
-                                    <th className="text-xl font-bold">Name</th>
+
                                     <th className="text-xl font-bold">Status</th>
                                     <th className="text-xl font-bold">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {/* row 1 */}
-                                <tr>
-                                    <td>
-                                        <div className="flex items-center gap-3">
-                                            <div className="avatar">
-                                                <div className="mask mask-squircle w-20 h-20">
-                                                    <img src="https://www.kannammacooks.com/wp-content/uploads/chettinadu-chicken-biriyani-1-3.jpg" alt="Avatar Tailwind CSS Component" />
+                                {
+                                    dbMeal.map(meal =>
+                                        <tr key={meal._id}>
+                                            <td>
+                                                <div className="flex items-center gap-3">
+                                                    <div className="avatar">
+                                                        <div className="mask mask-squircle w-20 h-20">
+                                                            <img src={meal.image} alt="Avatar Tailwind CSS Component" />
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <div className="font-bold text-xl">{meal.item}</div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div>
-                                                <div className="font-bold text-xl">Biriyani</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div className="font-bold text-xl">junaed@g.com</div>
-                                    </td>
-                                    <td>
-                                        <div className="font-bold text-xl">Junaed</div>
-                                    </td>
-                                    <td>
-                                        <div className="font-bold text-xl flex items-center"><IoMdStopwatch className="text-2xl font-bold text-violet-600" />Pending</div>
-                                    </td>
-                                    <td>
-                                        <div className="join join-vertical lg:join-horizontal">
-                                            <button className="btn join-item text-xl font-semibold bg-black text-white">Serve</button>
-                                        </div>
-                                    </td>
-                                </tr>
+                                            </td>
+                                            <td>
+                                                <div className="font-bold text-xl">{meal.email}</div>
+                                            </td>
+                                            <td>
+                                                <div className="font-bold text-xl flex items-center"><IoMdStopwatch className="text-2xl font-bold text-violet-600" />Pending</div>
+                                            </td>
+                                            <td>
+                                                <div className="join join-vertical lg:join-horizontal">
+                                                    <button onClick={() => handleDelete(meal._id)} className="btn join-item text-xl font-semibold bg-black text-white">Serve</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    )}
                             </tbody>
                         </table>
                     </div>

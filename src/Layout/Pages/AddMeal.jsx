@@ -6,8 +6,49 @@ import { MdAddToPhotos } from "react-icons/md";
 import { IoIosWallet } from "react-icons/io";
 import { IoFastFoodOutline } from "react-icons/io5";
 import { MdOutlineUpcoming } from "react-icons/md";
-
+import { useContext } from "react";
+import { Authcontext } from "../../providers/Authprovider";
+import Swal from 'sweetalert2'
 const AddMeal = () => {
+    const { user } = useContext(Authcontext);
+    const handleAddMeal = event => {
+        event.preventDefault();
+        const form = event.target;
+        const item = form.item.value;
+        const type = form.type.value;
+        const image = form.image.value;
+        const ingredients = form.ingredients.value;
+        const price = form.price.value;
+        const description = form.description.value;
+        const post_date = form.post_date.value;
+        const rating = form.rating.value;
+        const like = form.like.value;
+        const reviews = form.reviews.value;
+        const admin = form.name.value;
+        const email = form.email.value;
+        const newMeal = { admin, email, item, type, image, ingredients, price, description, post_date, rating, like, reviews };
+    
+        fetch('http://localhost:5000/meal', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newMeal)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.insertedId) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Meal Added Successfully',
+                        icon: 'success',
+                        confirmButtonText: 'Cool'
+                    })
+                    console.log('added');
+                }
+            })
+    }
     return (
         <div>
             <div className="w-full flex">
@@ -26,7 +67,7 @@ const AddMeal = () => {
                 <div className="w-5/6">
                     <h3 className="text-3xl text-center font-bold py-4">Add a new Meal</h3>
                     <div className="bg-green-50 border-2 border-green-400">
-                        <form >
+                        <form onSubmit={handleAddMeal}>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pb-5">
                                 {/* 1 */}
                                 <div className="form-control  items-center">
@@ -58,18 +99,8 @@ const AddMeal = () => {
                                         <span className="label-text font-bold text-xl">Meal Image</span>
                                     </label>
                                     <label className="input-group justify-center">
-                                        <span className="mr-3">Image</span>
+                                        <span className="mr-3">Image URL</span>
                                         <input type="text" name="image" placeholder="image url" className="input input-bordered" />
-                                    </label>
-                                </div>
-                                {/* 3 */}
-                                <div className="form-control  items-center">
-                                    <label className="label">
-                                        <span className="label-text font-bold text-xl">Image URL</span>
-                                    </label>
-                                    <label className="input-group justify-center">
-                                        <span>Image</span>
-                                        <input type="text" name="image" placeholder="image" className="input input-bordered" />
                                     </label>
                                 </div>
                                 {/* 4 */}
@@ -149,7 +180,7 @@ const AddMeal = () => {
                                     </label>
                                     <label className="input-group justify-center">
                                         <span className="mr-3">Admin Name</span>
-                                        <input type="text" name="admin_name" placeholder="admin name" className="input input-bordered" />
+                                        <input type="text" name="name" placeholder="admin name" defaultValue={user?.displayName} className="input input-bordered" />
                                     </label>
                                 </div>
                                 {/* 10 */}
@@ -159,7 +190,7 @@ const AddMeal = () => {
                                     </label>
                                     <label className="input-group justify-center">
                                         <span className="mr-3">Admin Email</span>
-                                        <input type="email" name="admin_email" placeholder="admin email" className="input input-bordered" />
+                                        <input type="email" name="email" placeholder="admin email" defaultValue={user?.email} className="input input-bordered" />
                                     </label>
                                 </div>
                                 {/* 11 */}

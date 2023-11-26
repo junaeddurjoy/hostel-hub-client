@@ -8,7 +8,15 @@ import { IoFastFoodOutline } from "react-icons/io5";
 import { MdOutlineUpcoming } from "react-icons/md";
 import { FaHeart } from "react-icons/fa";
 import { MdRateReview } from "react-icons/md";
+import { useEffect, useState } from "react";
+// import MealCard from "../Components/MealCard";
 const AllMeal = () => {
+    const [meals, setMeals] = useState([]);
+    useEffect( () => {
+        fetch('http://localhost:5000/meal')
+        .then(res => res.json())
+        .then(data => setMeals(data));
+    },[])
     return (
         <div>
             <div className="w-full flex">
@@ -26,6 +34,14 @@ const AllMeal = () => {
                 </div>
                 <div className="w-5/6">
                     <div className="overflow-x-auto">
+                    {/* <div className=" mt-10 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3">
+                    {
+                        meals.map(meal => <MealCard
+                            key={meal.meal_id}
+                            meal = {meal}
+                        ></MealCard>)
+                    }
+                </div> */}
                         <table className="table">
                             {/* head */}
                             <thead>
@@ -34,32 +50,40 @@ const AllMeal = () => {
                                     <th className="text-xl font-bold ">Likes</th>
                                     <th className="text-xl font-bold">Reviews</th>
                                     <th className="text-xl font-bold">Distributor</th>
+                                    <th className="text-xl font-bold">Distributor Email</th>
                                     <th className="text-xl font-bold">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {/* row 1 */}
-                                <tr>
+                                {
+                                    meals.map(meal => 
+                                    <tr
+                                        key={meal.meal_id}
+                                    >
                                     <td>
                                         <div className="flex items-center gap-3">
                                             <div className="avatar">
                                                 <div className="mask mask-squircle w-20 h-20">
-                                                    <img src="https://www.kannammacooks.com/wp-content/uploads/chettinadu-chicken-biriyani-1-3.jpg" alt="Avatar Tailwind CSS Component" />
+                                                    <img src={meal.image} alt="Avatar Tailwind CSS Component" />
                                                 </div>
                                             </div>
                                             <div>
-                                                <div className="font-bold text-xl">Biriyani</div>
+                                                <div className="font-bold text-xl">{meal.item}</div>
                                             </div>
                                         </div>
                                     </td>
                                     <td className="text-lg">
-                                        <p className="py-6 px-5 font-semibold list-disc flex items-center text-red-500"><FaHeart className="text-2xl" />7</p>
+                                        <p className="py-6 px-5 font-semibold list-disc flex items-center text-red-500"><FaHeart className="text-2xl" />{meal.like}</p>
                                     </td>
                                     <td className="text-lg">
-                                        <p className="py-6 px-5 font-semibold list-disc flex items-center text-purple-600"><MdRateReview className="text-2xl" />8</p>
+                                        <p className="py-6 px-5 font-semibold list-disc flex items-center text-purple-600"><MdRateReview className="text-2xl" />{meal.reviews}</p>
                                     </td>
                                     <td>
-                                        <div className="font-bold text-xl">Junaed</div>
+                                        <div className="font-bold text-xl">{meal.admin}</div>
+                                    </td>
+                                    <td>
+                                        <div className="font-bold text-xl">{meal.email}</div>
                                     </td>
                                     <td>
                                         <div className="join join-vertical lg:join-horizontal">
@@ -69,6 +93,7 @@ const AllMeal = () => {
                                         </div>
                                     </td>
                                 </tr>
+                                )}
                             </tbody>
                         </table>
                     </div>

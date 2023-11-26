@@ -6,7 +6,16 @@ import { MdAddToPhotos } from "react-icons/md";
 import { IoIosWallet } from "react-icons/io";
 import { IoFastFoodOutline } from "react-icons/io5";
 import { MdOutlineUpcoming } from "react-icons/md";
+import { useContext, useEffect, useState } from "react";
+import { Authcontext } from "../../providers/Authprovider";
 const ManageUsers = () => {
+    const { user } = useContext(Authcontext);
+    const [dbUser, setdbUser] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:5000/user')
+            .then(res => res.json())
+            .then(data => setdbUser(data));
+    }, []);
     return (
         <div>
             <div className="w-full flex">
@@ -35,31 +44,40 @@ const ManageUsers = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {/* row 1 */}
-                                <tr>
-                                    <td>
-                                        <div className="flex items-center gap-3">
-                                            <div className="font-bold text-xl">Junaed</div>
-                                        </div>
-                                    </td>
-                                    <td className="text-lg">
-                                        <p className="py-6 px-5 font-semibold">juaned@gmail.com</p>
-                                    </td>
-                                    <td className="text-lg">
-                                        <p className="py-6 px-5 font-semibold list-disc flex items-center">user</p>
-                                    </td>
-                                    <td>
-                                        <div className="join join-vertical lg:join-horizontal">
-                                            <button className="btn join-item text-xl font-semibold bg-black text-white">Make Admin</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                                {dbUser.map(userDB =>
+                                    <tr key={userDB._id}>
+                                        {
+                                            user?.email != userDB.email &&
+                                            <>
+                                                <td>
+                                                    <div className="flex items-center gap-3">
+                                                        <div className="font-bold text-xl">{userDB.name}</div>
+                                                    </div>
+                                                </td>
+                                                <td className="text-lg">
+                                                    <p className="py-6 px-5 font-semibold">{userDB.email}</p>
+                                                </td>
+                                                <td className="text-lg">
+                                                    <p className="py-6 px-5 font-semibold list-disc flex items-center">{userDB.role}</p>
+                                                </td>
+                                                <td>
+                                                    <div className="join join-vertical lg:join-horizontal">
+                                                        <Link to={`/updateuser/${userDB._id}`}>
+                                                            <button className="btn join-item text-xl font-semibold bg-black text-white">Update User</button>
+                                                        </Link>
+
+                                                </div>
+                                            </td>
+                                    </>
+                                        }
+                            </tr>)
+                                }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
+        </div >
     );
 };
 

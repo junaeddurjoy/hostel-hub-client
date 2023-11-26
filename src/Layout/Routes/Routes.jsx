@@ -17,6 +17,7 @@ import AllMeal from "../Pages/AllMeal";
 import AllReviews from "../Pages/AllReviews";
 import ServeMeal from "../Pages/ServeMeal";
 import UpcomingMealDashboard from "../Pages/UpcomingMealDashboard";
+import UpdateUser from "../Pages/UpdateUser";
 
 export const router = createBrowserRouter([
   {
@@ -92,6 +93,11 @@ export const router = createBrowserRouter([
         path: "/manageusers",
         element: <ManageUsers></ManageUsers>,
       },
+      {
+        path: "/updateuser/:id",
+        element: <UpdateUser></UpdateUser>,
+        loader: ({ params }) => fetch(`http://localhost:5000/user/${params.id}`)
+    },
     ]
   },
 ]);

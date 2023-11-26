@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { MdOutlineRateReview } from "react-icons/md";
 import { MdManageAccounts } from "react-icons/md";
@@ -6,12 +6,16 @@ import { MdAddToPhotos } from "react-icons/md";
 import { IoIosWallet } from "react-icons/io";
 import { IoFastFoodOutline } from "react-icons/io5";
 import { MdOutlineUpcoming } from "react-icons/md";
-import { useContext } from "react";
-import { Authcontext } from "../../providers/Authprovider";
+
 import Swal from 'sweetalert2'
-const AddMeal = () => {
-    const { user } = useContext(Authcontext);
-    const handleAddMeal = event => {
+const UpdateMeal = () => {
+
+    const dbMeals = useLoaderData();
+    const { _id, admin, email, item, type, image, ingredients, price, description, post_date, rating, like, reviews,launch } = dbMeals;
+
+
+
+    const handleUpdateMeal = event => {
         event.preventDefault();
         const form = event.target;
         const item = form.item.value;
@@ -27,26 +31,26 @@ const AddMeal = () => {
         const admin = form.name.value;
         const email = form.email.value;
         const launch = form.launch.value;
-        const newMeal = { admin, email, launch, item, type, image, ingredients, price, description, post_date, rating, like, reviews };
+        const updatedApply = { admin, email, item, type, image, ingredients, price, description, post_date, rating, like, reviews, launch };
     
-        fetch('http://localhost:5000/meal', {
-            method: 'POST',
+        fetch(`http://localhost:5000/meal/${_id}`, {
+            method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(newMeal)
+            body: JSON.stringify(updatedApply)
         })
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-                if (data.insertedId) {
+                if (data.modifiedCount > 0) {
                     Swal.fire({
                         title: 'Success!',
-                        text: 'Meal Added Successfully',
+                        text: 'Meal Updated Successfully',
                         icon: 'success',
                         confirmButtonText: 'Cool'
                     })
-                    console.log('added');
+                    console.log('updated');
                 }
             })
     }
@@ -66,9 +70,9 @@ const AddMeal = () => {
                     </ul>
                 </div>
                 <div className="w-5/6">
-                    <h3 className="text-3xl text-center font-bold py-4">Add a new Meal</h3>
+                    <h3 className="text-3xl text-center font-bold py-4">Update Meal</h3>
                     <div className="bg-green-50 border-2 border-green-400">
-                        <form onSubmit={handleAddMeal}>
+                        <form onSubmit={handleUpdateMeal}>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pb-5">
                                 {/* 1 */}
                                 <div className="form-control  items-center">
@@ -77,7 +81,7 @@ const AddMeal = () => {
                                     </label>
                                     <label className="input-group justify-center">
                                         <span className="mr-3">Name</span>
-                                        <input type="text" name="item" placeholder="meal name" className="input input-bordered" />
+                                        <input type="text" name="item" defaultValue={item} placeholder="meal name" className="input input-bordered" />
                                     </label>
                                 </div>
                                 {/* 2 */}
@@ -87,7 +91,7 @@ const AddMeal = () => {
                                     </label>
                                     <label className="input-group justify-center">
                                         <span className="mr-3">Type</span>
-                                        <select name="type" className="input input-bordered">
+                                        <select name="type" defaultValue={type} className="input input-bordered">
                                             <option name="lunch" id="">lunch</option>
                                             <option name="dinner" id="">dinner</option>
                                             <option name="breakfast" id="">breakfast</option>
@@ -101,7 +105,7 @@ const AddMeal = () => {
                                     </label>
                                     <label className="input-group justify-center">
                                         <span className="mr-3">Image URL</span>
-                                        <input type="text" name="image" placeholder="image url" className="input input-bordered" />
+                                        <input type="text" name="image" defaultValue={image} placeholder="image url" className="input input-bordered" />
                                     </label>
                                 </div>
                                 {/* 4 */}
@@ -111,7 +115,7 @@ const AddMeal = () => {
                                     </label>
                                     <label className="input-group justify-center">
                                         <span className="mr-3">Ingredients</span>
-                                        <input type="text" name="ingredients" placeholder="ingredients" className="input input-bordered" />
+                                        <input type="text" name="ingredients" defaultValue={ingredients} placeholder="ingredients" className="input input-bordered" />
                                     </label>
                                 </div>
                                 {/* 5 */}
@@ -121,7 +125,7 @@ const AddMeal = () => {
                                     </label>
                                     <label className="input-group justify-center">
                                         <span className="mr-3">Description</span>
-                                        <input type="text" name="description" placeholder="description" className="input input-bordered" />
+                                        <input type="text" name="description" defaultValue={description} placeholder="description" className="input input-bordered" />
                                     </label>
                                 </div>
                                 {/* 6 */}
@@ -131,7 +135,7 @@ const AddMeal = () => {
                                     </label>
                                     <label className="input-group justify-center">
                                         <span className="mr-3">Price </span>
-                                        <input type="number" name="price" placeholder="price in taka" className="input input-bordered" />
+                                        <input type="number" name="price" defaultValue={price} placeholder="price in taka" className="input input-bordered" />
                                     </label>
                                 </div>
                                 {/* 7 */}
@@ -141,7 +145,7 @@ const AddMeal = () => {
                                     </label>
                                     <label className="input-group justify-center">
                                         <span className="mr-3">Date</span>
-                                        <input type="date" name="post_date" placeholder="date" className="input input-bordered" />
+                                        <input type="date" name="post_date" defaultValue={post_date} placeholder="date" className="input input-bordered" />
                                     </label>
                                 </div>
                                 {/* 8 */}
@@ -151,7 +155,7 @@ const AddMeal = () => {
                                     </label>
                                     <label className="input-group justify-center">
                                         <span className="mr-3">Rating</span>
-                                        <input type="number" name="rating" placeholder="rating" className="input input-bordered" />
+                                        <input type="number" name="rating" defaultValue={rating} placeholder="rating" className="input input-bordered" />
                                     </label>
                                 </div>
                                 {/* 9 */}
@@ -161,7 +165,7 @@ const AddMeal = () => {
                                     </label>
                                     <label className="input-group justify-center">
                                         <span className="mr-3">Likes</span>
-                                        <input type="number" name="like" placeholder="like" className="input input-bordered" />
+                                        <input type="number" name="like" defaultValue={like} placeholder="like" className="input input-bordered" />
                                     </label>
                                 </div>
                                 {/* 9 */}
@@ -171,7 +175,7 @@ const AddMeal = () => {
                                     </label>
                                     <label className="input-group justify-center">
                                         <span className="mr-3">Reviews</span>
-                                        <input type="number" name="reviews" placeholder="review" className="input input-bordered" />
+                                        <input type="number" name="reviews" defaultValue={reviews} placeholder="review" className="input input-bordered" />
                                     </label>
                                 </div>
                                 {/* 10 */}
@@ -181,7 +185,7 @@ const AddMeal = () => {
                                     </label>
                                     <label className="input-group justify-center">
                                         <span className="mr-3">Admin Name</span>
-                                        <input type="text" name="name" placeholder="admin name" defaultValue={user?.displayName} className="input input-bordered" />
+                                        <input type="text" name="name" placeholder="admin name" defaultValue={admin} className="input input-bordered" />
                                     </label>
                                 </div>
                                 {/* 10 */}
@@ -191,7 +195,7 @@ const AddMeal = () => {
                                     </label>
                                     <label className="input-group justify-center">
                                         <span className="mr-3">Admin Email</span>
-                                        <input type="email" name="email" placeholder="admin email" defaultValue={user?.email} className="input input-bordered" />
+                                        <input type="email" name="email" placeholder="admin email" defaultValue={email} className="input input-bordered" />
                                     </label>
                                 </div>
                                 {/* 11 */}
@@ -201,7 +205,7 @@ const AddMeal = () => {
                                     </label>
                                     <label className="input-group justify-center">
                                         <span className="mr-3">Add/Upcoming</span>
-                                        <select name="launch" className="input input-bordered">
+                                        <select name="launch" defaultValue={launch} className="input input-bordered">
                                             <option name="add" id="">Add</option>
                                             <option name="upcoming" id="">Upcoming</option>
                                         </select>
@@ -219,4 +223,4 @@ const AddMeal = () => {
     );
 };
 
-export default AddMeal;
+export default UpdateMeal;

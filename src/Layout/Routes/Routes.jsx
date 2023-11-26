@@ -1,4 +1,4 @@
-import {createBrowserRouter} from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Root from "../Root";
 import Home from "../Pages/Home";
 import UpcomingMeals from "../Pages/UpcomingMeals";
@@ -18,6 +18,7 @@ import AllReviews from "../Pages/AllReviews";
 import ServeMeal from "../Pages/ServeMeal";
 import UpcomingMealDashboard from "../Pages/UpcomingMealDashboard";
 import UpdateUser from "../Pages/UpdateUser";
+import UpdateMeal from "../Pages/UpdateMeal";
 
 export const router = createBrowserRouter([
   {
@@ -97,7 +98,12 @@ export const router = createBrowserRouter([
         path: "/updateuser/:id",
         element: <UpdateUser></UpdateUser>,
         loader: ({ params }) => fetch(`http://localhost:5000/user/${params.id}`)
-    },
+      },
+      {
+        path: "/updatemeal/:id",
+        element: <UpdateMeal></UpdateMeal>,
+        loader: ({ params }) => fetch(`http://localhost:5000/meal/${params.id}`)
+      },
     ]
   },
 ]);

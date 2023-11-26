@@ -9,14 +9,43 @@ import { MdOutlineUpcoming } from "react-icons/md";
 import { FaHeart } from "react-icons/fa";
 import { MdRateReview } from "react-icons/md";
 import { useEffect, useState } from "react";
-// import MealCard from "../Components/MealCard";
+import Swal from 'sweetalert2'
 const AllMeal = () => {
     const [meals, setMeals] = useState([]);
-    useEffect( () => {
+    useEffect(() => {
         fetch('http://localhost:5000/meal')
-        .then(res => res.json())
-        .then(data => setMeals(data));
-    },[])
+            .then(res => res.json())
+            .then(data => setMeals(data));
+    }, [])
+
+
+
+    const [foods, setFoods] = useState([]);
+    const handleDelete = id => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/meal/${id}`, {
+                    method: 'DELETE'
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.deletedCount > 0) {
+                            const remaining = foods.filter(food => food._id !== id);
+                            setFoods(remaining);
+                            location.reload();
+                        }
+                    })
+            }
+        })
+    }
     return (
         <div>
             <div className="w-full flex">
@@ -34,7 +63,7 @@ const AllMeal = () => {
                 </div>
                 <div className="w-5/6">
                     <div className="overflow-x-auto">
-                    {/* <div className=" mt-10 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3">
+                        {/* <div className=" mt-10 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3">
                     {
                         meals.map(meal => <MealCard
                             key={meal.meal_id}
@@ -57,43 +86,48 @@ const AllMeal = () => {
                             <tbody>
                                 {/* row 1 */}
                                 {
-                                    meals.map(meal => 
-                                    <tr
-                                        key={meal.meal_id}
-                                    >
-                                    <td>
-                                        <div className="flex items-center gap-3">
-                                            <div className="avatar">
-                                                <div className="mask mask-squircle w-20 h-20">
-                                                    <img src={meal.image} alt="Avatar Tailwind CSS Component" />
+                                    meals.map(meal =>
+                                        <tr
+                                            key={meal.meal_id}
+                                        >
+                                            <td>
+                                                <div className="flex items-center gap-3">
+                                                    <div className="avatar">
+                                                        <div className="mask mask-squircle w-20 h-20">
+                                                            <img src={meal.image} alt="Avatar Tailwind CSS Component" />
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <div className="font-bold text-xl">{meal.item}</div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div>
-                                                <div className="font-bold text-xl">{meal.item}</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td className="text-lg">
-                                        <p className="py-6 px-5 font-semibold list-disc flex items-center text-red-500"><FaHeart className="text-2xl" />{meal.like}</p>
-                                    </td>
-                                    <td className="text-lg">
-                                        <p className="py-6 px-5 font-semibold list-disc flex items-center text-purple-600"><MdRateReview className="text-2xl" />{meal.reviews}</p>
-                                    </td>
-                                    <td>
-                                        <div className="font-bold text-xl">{meal.admin}</div>
-                                    </td>
-                                    <td>
-                                        <div className="font-bold text-xl">{meal.email}</div>
-                                    </td>
-                                    <td>
-                                        <div className="join join-vertical lg:join-horizontal">
-                                            <button className="btn join-item text-xl font-semibold bg-purple-500">Update</button>
-                                            <button className="btn join-item text-xl font-semibold bg-red-500">Delete</button>
-                                            <button className="btn join-item text-xl font-semibold bg-green-500">View</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                )}
+                                            </td>
+                                            <td className="text-lg">
+                                                <p className="py-6 px-5 font-semibold list-disc flex items-center text-red-500"><FaHeart className="text-2xl" />{meal.like}</p>
+                                            </td>
+                                            <td className="text-lg">
+                                                <p className="py-6 px-5 font-semibold list-disc flex items-center text-purple-600"><MdRateReview className="text-2xl" />{meal.reviews}</p>
+                                            </td>
+                                            <td>
+                                                <div className="font-bold text-xl">{meal.admin}</div>
+                                            </td>
+                                            <td>
+                                                <div className="font-bold text-xl">{meal.email}</div>
+                                            </td>
+                                            <td>
+                                                <div className="join join-vertical lg:join-horizontal">
+                                                    <Link to={`/updatemeal/${meal._id}`}>
+                                                        <button className="btn join-item text-xl font-semibold bg-purple-500">Update</button>
+                                                    </Link>
+                                                    <button onClick={() => handleDelete(meal._id)} className="btn join-item text-xl font-semibold bg-red-500">Delete</button>
+                                                    <Link to={`/mealdetails/${meal._id}`}>
+                                                        <button className="btn join-item text-xl font-semibold bg-green-500">View</button>
+                                                    </Link>
+
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    )}
                             </tbody>
                         </table>
                     </div>

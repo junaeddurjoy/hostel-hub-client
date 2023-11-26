@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 
 /* eslint-disable react/prop-types */
 const MealCard = ({ meal }) => {
-    const { _id, item, image, ingredients,post_time,launch } = meal;
-    console.log('asdfadsfasdf',item,post_time)
+    const { _id, item, image, ingredients,post_time,launch,price } = meal;
     return (
         <>
             {
@@ -16,6 +15,7 @@ const MealCard = ({ meal }) => {
                     <div>
                         <h2 className="card-title">{item}</h2>
                         <p>{ingredients}</p>
+                        <p>{price}tk</p>
                     </div>
                     <div className="justify-end">
                         <Link to={`/mealdetails/${_id}`}><button className="ml-20 btn btn-active btn-accent text-white text-lg font-light">Details</button></Link>

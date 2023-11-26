@@ -8,11 +8,12 @@ import { MdRateReview } from "react-icons/md";
 import { useContext, useEffect, useState } from "react";
 import { Authcontext } from "../../providers/Authprovider";
 import Swal from 'sweetalert2'
+import { TbCurrencyTaka } from "react-icons/tb";
 
 const MealDetails = () => {
     const { user } = useContext(Authcontext);
     const meal = useLoaderData();
-    const { _id, image, item, type, ingredients, rating, like, reviews, post_time } = meal;
+    const { _id, image, item, type, ingredients, price, rating, like, reviews, post_time } = meal;
     const food_id = _id;
 
     const [dbUsers, setdbUsers] = useState([]);
@@ -62,6 +63,7 @@ const MealDetails = () => {
                                 <p className="py-6 px-5 font-semibold list-disc flex items-center"><GiCoolSpices className="text-2xl" />{ingredients}</p>
                                 <p className="py-6 px-5 font-semibold list-disc flex items-center text-yellow-600 "><FaStar className="text-2xl" />{rating}</p>
                             </div>
+                            <p className="py-6 px-5 font-semibold list-disc flex items-center text-blue-600 text-4xl"><TbCurrencyTaka className="text-4xl" />{price}</p>
                             <p className="py-6 px-5 font-semibold list-disc flex items-center text-red-500"><FaHeart className="text-2xl" />{like}</p>
                             <p className="py-6 px-5 font-semibold list-disc flex items-center text-purple-600"><MdRateReview className="text-2xl" />{reviews}</p>
                             {

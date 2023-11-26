@@ -14,7 +14,7 @@ const AllReviews = () => {
 
     const [dbMeal, setdbMeal] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/request')
+        fetch('https://hostel-hub-server.vercel.app/request')
             .then(res => res.json())
             .then(data => setdbMeal(data));
     }, []);

@@ -7,8 +7,8 @@ const Home = () => {
             <Banner></Banner>
             <Meals></Meals>
             <Membership></Membership>
-            
             {/* menu
+            deploy: npm run build firebase deploy
             <div className='lg:mx-32 my-10'>
                 <h1 className='divider text-center text-3xl md:text-2xl lg:text-4xl font-bold mb-10'>Our Services</h1>
                 <div className="hero">

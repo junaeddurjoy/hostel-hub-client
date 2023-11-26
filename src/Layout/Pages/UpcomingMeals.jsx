@@ -4,7 +4,7 @@ import UpcomingMealCard from "../Components/UpcomingMealCard";
 const UpcomingMeals = () => {
     const [meals, setMeals] = useState([]);
     useEffect( () => {
-        fetch('http://localhost:5000/meal')
+        fetch('https://hostel-hub-server.vercel.app/meal')
         .then(res => res.json())
         .then(data => setMeals(data));
     },[])
@@ -12,7 +12,7 @@ const UpcomingMeals = () => {
     return (
         <div>
             <div className='lg:mx-32 my-10'>
-                <div className="divider text-2xl lg:text-4xl font-semibold">Our Meals</div>
+                <div className="divider text-2xl lg:text-4xl font-semibold">Upcoming Meals</div>
                 <div className=" mt-10 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3">
                     {
                         meals.map(meal => <UpcomingMealCard

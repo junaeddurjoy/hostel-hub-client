@@ -20,7 +20,7 @@ const UpdateUser = () => {
         const role = form.role.value;
         const membership = form.membership.value;
         const updatedApply = { role, name, email, membership };
-        fetch(`http://localhost:5000/user/${_id}`, {
+        fetch(`https://hostel-hub-server.vercel.app/user/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

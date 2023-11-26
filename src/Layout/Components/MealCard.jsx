@@ -4,11 +4,12 @@ import { Link } from "react-router-dom";
 
 /* eslint-disable react/prop-types */
 const MealCard = ({ meal }) => {
-    const { _id, item, image, ingredients,post_time } = meal;
+    const { _id, item, image, ingredients,post_time,launch } = meal;
+    console.log('asdfadsfasdf',item,post_time)
     return (
         <>
             {
-                post_time!="upcoming" &&
+                launch!="upcoming" &&
                 <div className="card card-compact w-96 bg-base-100 shadow-xl mx-auto mb-10">
                 <figure><img className='h-80 w-96' src={image} alt="foods" /></figure>
                 <div className="card-body grid grid-cols-2">

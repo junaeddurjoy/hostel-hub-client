@@ -169,7 +169,7 @@ const AddMeal = () => {
                                     </label>
                                     <label className="input-group justify-center">
                                         <span className="mr-3">Add/Upcoming</span>
-                                        <select name="launch_time" className="input input-bordered">
+                                        <select name="launch" className="input input-bordered">
                                             <option name="add" id="">Add</option>
                                             <option name="upcoming" id="">Upcoming</option>
                                         </select>

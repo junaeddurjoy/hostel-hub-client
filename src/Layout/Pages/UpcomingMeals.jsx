@@ -8,6 +8,7 @@ const UpcomingMeals = () => {
         .then(res => res.json())
         .then(data => setMeals(data));
     },[])
+    
     return (
         <div>
             <div className='lg:mx-32 my-10'>

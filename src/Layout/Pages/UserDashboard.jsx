@@ -19,7 +19,9 @@ const UserDashboard = () => {
     let dbRole = '';
     const matched = dbUsers.map(dbUser => {
         const { role } = dbUser;
-        dbRole = { role };
+        if(dbUser.email==user?.email){
+            dbRole = { role };
+        }
     })
     return (
         <div className="w-full flex">

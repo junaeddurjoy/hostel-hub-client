@@ -22,7 +22,6 @@ const Navbar = () => {
     let dbRole = '';
     const matched = dbUsers.map(dbUser => {
         const { email } = dbUser;
-        console.log(email);
         if (email == user?.email) {
             const { role } = dbUser;
             dbRole = {role};
@@ -37,9 +36,9 @@ const Navbar = () => {
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </label>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                            <Link to={"/"}><li><a>Home</a></li></Link>
-                            <Link to={'/meals'}><li><a>Meals</a></li></Link>
-                            <Link to={'/upcomingMeals'}><li><a>Upcoming Meals</a></li></Link>
+                            <Link to={"/"}><li>Home</li></Link>
+                            <Link to={'/meals'}><li>Meals</li></Link>
+                            <Link to={'/upcomingMeals'}><li>Upcoming Meals</li></Link>
                         </ul>
                     </div>
                     <div className="flex items-center">
@@ -49,9 +48,9 @@ const Navbar = () => {
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
-                        <Link to={'/'}><li className="text-xl hover:text-2xl font-semibold"><a>Home</a></li></Link>
-                        <Link to={'/meals'}><li className="text-xl hover:text-2xl font-semibold"><a>Meals</a></li></Link>
-                        <Link to={'/upcomingMeals'}><li className="text-xl hover:text-2xl font-semibold"><a>Upcoming Meals</a></li></Link>
+                        <Link to={'/'}><li className="text-xl hover:text-2xl font-semibold mx-2">Home</li></Link>
+                        <Link to={'/meals'}><li className="text-xl hover:text-2xl font-semibold mx-2">Meals</li></Link>
+                        <Link to={'/upcomingMeals'}><li className="text-xl hover:text-2xl font-semibold mx-2">Upcoming Meal</li></Link>
                     </ul>
                 </div>
                 <div className="navbar-end">
@@ -98,11 +97,11 @@ const Navbar = () => {
 
                             }
                             {
-                                dbRole.role == 'user' &&
+                                dbRole.role != 'admin' &&
                                 <Link to={'/userdashboard'}><li className="text-lg font-semibold hover:text-2xl">User Dashboard</li></Link>
                             }
                             {
-                                dbRole.role == 'user' &&
+                                dbRole.role != 'admin' &&
                                 <Link to={'/checkout'}><li className="text-lg font-semibold hover:text-2xl">Checkout</li></Link>
                             }
                             {

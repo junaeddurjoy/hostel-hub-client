@@ -45,7 +45,8 @@ const Registration = () => {
                     // add membership to database
                     let membership='bronze';
                     let role='user';
-                    const newUser = {displayName, email, membership, role }
+                    let food=[];
+                    const newUser = {displayName, email, membership, role, food }
                     fetch('http://localhost:5000/user', {
                         method: 'POST',
                         headers: {

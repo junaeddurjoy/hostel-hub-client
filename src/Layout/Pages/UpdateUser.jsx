@@ -89,10 +89,11 @@ const UpdateUser = () => {
                                     <label className="input-group justify-center">
                                         <span>Role</span>
                                         <select defaultValue={role} name="role" className="input input-bordered">
-                                            <option name="user" id="">User</option>
-                                            <option name="member" id="">Member</option>
-                                            <option name="super" id="">Super</option>
-                                            <option name="premium" id="">Premium</option>
+                                            <option name="user" id="">user</option>
+                                            <option name="member" id="">member</option>
+                                            <option name="super" id="">super</option>
+                                            <option name="premium" id="">premium</option>
+                                            <option name="admin" id="">admin</option>
                                         </select>
                                     </label>
                                 </div>

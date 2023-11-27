@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 const UpcomingMealDashboard = () => {
     const [meals, setMeals] = useState([]);
     useEffect(() => {
-        fetch('https://hostel-hub-server.vercel.app/meal')
+        fetch('http://localhost:5000/meal')
             .then(res => res.json())
             .then(data => setMeals(data));
     }, [])

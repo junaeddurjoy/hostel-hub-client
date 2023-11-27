@@ -20,6 +20,7 @@ import UpcomingMealDashboard from "../Pages/UpcomingMealDashboard";
 import UpdateUser from "../Pages/UpdateUser";
 import UpdateMeal from "../Pages/UpdateMeal";
 import PrivateRoutes from "../../PrivateRoutes";
+import Payment from "../Pages/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -41,7 +42,7 @@ export const router = createBrowserRouter([
       {
         path: "/mealdetails/:id",
         element: <PrivateRoutes><MealDetails></MealDetails></PrivateRoutes>,
-        loader: ({ params }) => fetch(`https://hostel-hub-server.vercel.app/meal/${params.id}`)
+        loader: ({ params }) => fetch(`http://localhost:5000/meal/${params.id}`)
       },
       {
         path: "/login",
@@ -62,6 +63,10 @@ export const router = createBrowserRouter([
       {
         path: "/checkout",
         element: <PrivateRoutes><CheckOut></CheckOut></PrivateRoutes>,
+      },
+      {
+        path: "/payment",
+        element: <PrivateRoutes><Payment></Payment></PrivateRoutes>,
       },
       {
         path: "/requestedmeals",
@@ -98,12 +103,12 @@ export const router = createBrowserRouter([
       {
         path: "/updateuser/:id",
         element: <PrivateRoutes><UpdateUser></UpdateUser></PrivateRoutes>,
-        loader: ({ params }) => fetch(`https://hostel-hub-server.vercel.app/user/${params.id}`)
+        loader: ({ params }) => fetch(`http://localhost:5000/user/${params.id}`)
       },
       {
         path: "/updatemeal/:id",
         element: <PrivateRoutes><UpdateMeal></UpdateMeal></PrivateRoutes>,
-        loader: ({ params }) => fetch(`https://hostel-hub-server.vercel.app/meal/${params.id}`)
+        loader: ({ params }) => fetch(`http://localhost:5000/meal/${params.id}`)
       },
     ]
   },

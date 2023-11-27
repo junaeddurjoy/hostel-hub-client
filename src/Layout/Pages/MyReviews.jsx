@@ -12,7 +12,7 @@ const MyReviews = () => {
 
     const [dbMeal, setdbMeal] = useState([]);
     useEffect(() => {
-        fetch('https://hostel-hub-server.vercel.app/request')
+        fetch('http://localhost:5000/request')
             .then(res => res.json())
             .then(data => setdbMeal(data));
     }, []);

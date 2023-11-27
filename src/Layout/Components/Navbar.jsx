@@ -15,7 +15,7 @@ const Navbar = () => {
 
     const [dbUsers, setdbUsers] = useState([]);
     useEffect(() => {
-        fetch('https://hostel-hub-server.vercel.app/user')
+        fetch('http://localhost:5000/user')
             .then(res => res.json())
             .then(data => setdbUsers(data));
     }, [])

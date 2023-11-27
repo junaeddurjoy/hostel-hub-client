@@ -29,7 +29,7 @@ const AddMeal = () => {
         const launch = form.launch.value;
         const newMeal = { admin, email, launch, item, type, image, ingredients, price, description, post_date, rating, like, reviews };
     
-        fetch('https://hostel-hub-server.vercel.app/meal', {
+        fetch('http://localhost:5000/meal', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

@@ -14,7 +14,7 @@ const RequestedMeals = () => {
 
     const [dbMeal, setdbMeal] = useState([]);
     useEffect(() => {
-        fetch('https://hostel-hub-server.vercel.app/request')
+        fetch('http://localhost:5000/request')
             .then(res => res.json())
             .then(data => setdbMeal(data));
     }, []);
@@ -33,7 +33,7 @@ const RequestedMeals = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`https://hostel-hub-server.vercel.app/request/${id}`, {
+                fetch(`http://localhost:5000/request/${id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())

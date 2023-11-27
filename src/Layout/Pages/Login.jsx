@@ -27,7 +27,7 @@ const Login = () => {
                 let role = 'user';
            
                 const newUser = { name, email, membership, role}
-                fetch('https://hostel-hub-server.vercel.app/user', {
+                fetch('http://localhost:5000/user', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

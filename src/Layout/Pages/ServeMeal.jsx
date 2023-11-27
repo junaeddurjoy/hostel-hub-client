@@ -12,7 +12,7 @@ import Swal from 'sweetalert2'
 const ServeMeal = () => {
     const [dbMeal, setdbMeal] = useState([]);
     useEffect(() => {
-        fetch('https://hostel-hub-server.vercel.app/request')
+        fetch('http://localhost:5000/request')
             .then(res => res.json())
             .then(data => setdbMeal(data));
     }, []);
@@ -28,7 +28,7 @@ const ServeMeal = () => {
             confirmButtonText: 'Yes, Serve it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`https://hostel-hub-server.vercel.app/request/${id}`, {
+                fetch(`http://localhost:5000/request/${id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())

@@ -1,10 +1,12 @@
 import Banner from '../Components/Banner'
 import Meals from '../Pages/Meals'
 import Membership from '../Components/Membership';
+
 const Home = () => {
     return (
         <div>
             <Banner></Banner>
+            
             <Meals></Meals>
             <Membership></Membership>
             {/* menu

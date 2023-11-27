@@ -18,19 +18,19 @@ const MealDetails = () => {
 
     const [dbUsers, setdbUsers] = useState([]);
     useEffect(() => {
-        fetch('https://hostel-hub-server.vercel.app/user')
+        fetch('http://localhost:5000/user')
             .then(res => res.json())
             .then(data => setdbUsers(data));
     }, []);
 
     let email = user?.email;
-    const updatedReqApply = { image, item, type, ingredients, rating, like, reviews,email };
+    const updatedReqApply = { image, item, type, ingredients, price, rating, like, reviews,email };
     const handleMealRequest = event => {
         event.preventDefault();
         const matched = dbUsers.map(dbUser => {
             const { email } = dbUser;
             if (email == user?.email) {
-                fetch('https://hostel-hub-server.vercel.app/request', {
+                fetch('http://localhost:5000/request', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

@@ -4,7 +4,7 @@ import UpcomingMealCard from "../Components/UpcomingMealCard";
 const UpcomingMeals = () => {
     const [meals, setMeals] = useState([]);
     useEffect( () => {
-        fetch('https://hostel-hub-server.vercel.app/meal')
+        fetch('http://localhost:5000/meal')
         .then(res => res.json())
         .then(data => setMeals(data));
     },[])

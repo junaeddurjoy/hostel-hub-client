@@ -45,8 +45,8 @@ const Registration = () => {
                     // add membership to database
                     let membership='bronze';
                     let role='user';
-                 
-                    const newUser = {displayName, email, membership, role }
+                    let name = displayName;
+                    const newUser = { name, email, membership, role }
                     fetch('https://hostel-hub-server.vercel.app/user', {
                         method: 'POST',
                         headers: {

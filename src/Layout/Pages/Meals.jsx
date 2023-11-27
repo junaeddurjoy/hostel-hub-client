@@ -5,7 +5,7 @@ import 'react-tabs/style/react-tabs.css';
 const Meals = () => {
     const [meals, setMeals] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/meal')
+        fetch('https://hostel-hub-server.vercel.app/meal')
             .then(res => res.json())
             .then(data => setMeals(data));
     }, [])

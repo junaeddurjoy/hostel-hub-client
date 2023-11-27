@@ -12,7 +12,7 @@ const ManageUsers = () => {
     const { user } = useContext(Authcontext);
     const [dbUser, setdbUser] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/user')
+        fetch('https://hostel-hub-server.vercel.app/user')
             .then(res => res.json())
             .then(data => setdbUser(data));
     }, []);

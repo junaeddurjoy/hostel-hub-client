@@ -33,7 +33,7 @@ const UpdateMeal = () => {
         const launch = form.launch.value;
         const updatedApply = { admin, email, item, type, image, ingredients, price, description, post_date, rating, like, reviews, launch };
     
-        fetch(`http://localhost:5000/meal/${_id}`, {
+        fetch(`https://hostel-hub-server.vercel.app/meal/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

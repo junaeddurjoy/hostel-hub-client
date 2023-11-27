@@ -18,7 +18,7 @@ const MealDetails = () => {
 
     const [dbUsers, setdbUsers] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/user')
+        fetch('https://hostel-hub-server.vercel.app/user')
             .then(res => res.json())
             .then(data => setdbUsers(data));
     }, []);
@@ -30,7 +30,7 @@ const MealDetails = () => {
         const matched = dbUsers.map(dbUser => {
             const { email } = dbUser;
             if (email == user?.email) {
-                fetch('http://localhost:5000/request', {
+                fetch('https://hostel-hub-server.vercel.app/request', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

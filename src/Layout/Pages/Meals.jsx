@@ -15,7 +15,7 @@ const Meals = () => {
                 <div className="divider text-2xl lg:text-4xl font-semibold">Our Meals</div>
                 <Tabs>
                     <TabList>
-                        <Tab>All</Tab>
+                        <Tab >All</Tab>
                         <Tab>BreakFast</Tab>
                         <Tab>Lunch</Tab>
                         <Tab>Dinner</Tab>

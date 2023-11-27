@@ -94,6 +94,12 @@ const UpcomingMealDashboard = () => {
                             </tbody>
                         </table>
                     </div>
+                    <div className="join w-1/5 ml-96 mt-20">
+                        <button className="join-item btn">1</button>
+                        <button className="join-item btn ">2</button>
+                        <button className="join-item btn">3</button>
+                        <button className="join-item btn">4</button>
+                    </div>
                 </div>
             </div>
         </div>

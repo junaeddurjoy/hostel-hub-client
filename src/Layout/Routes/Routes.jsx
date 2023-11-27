@@ -21,11 +21,13 @@ import UpdateUser from "../Pages/UpdateUser";
 import UpdateMeal from "../Pages/UpdateMeal";
 import PrivateRoutes from "../../PrivateRoutes";
 import Payment from "../Pages/Payment";
+import ErrorPage from "../Pages/ErrorPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",

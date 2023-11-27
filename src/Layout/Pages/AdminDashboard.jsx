@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Link } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { MdOutlineRateReview } from "react-icons/md";
@@ -8,9 +9,23 @@ import { IoFastFoodOutline } from "react-icons/io5";
 import { MdOutlineUpcoming } from "react-icons/md";
 import { RiAdminFill } from "react-icons/ri";
 import { Authcontext } from "../../providers/Authprovider";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 const AdminDashboard = () => {
     const { user } = useContext(Authcontext);
+    const [meals, setMeals] = useState([]);
+    useEffect(() => {
+        fetch('https://hostel-hub-server.vercel.app/meal')
+            .then(res => res.json())
+            .then(data => setMeals(data));
+    }, [])
+    let total = 0;
+    const matched = meals.map(meal => {
+        if (meal.email == user?.email) {
+            total += 1;
+        }
+
+    })
+    console.log(total);
     return (
         <div>
             <div className="w-full flex">
@@ -33,7 +48,10 @@ const AdminDashboard = () => {
                             <div>
                                 <h1 className="text-5xl font-bold">{user?.displayName}</h1>
                                 <br />
-                                
+                                <h1 className="text-2xl">{user?.email}</h1>
+                                <br />
+                                <h1 className="text-2xl"><span className="text-3xl">Added Meal:</span> {total}</h1>
+                                <br />
                                 <h1 className="text-5xl font-bold flex gap-5"><RiAdminFill />Admin</h1>
                             </div>
                         </div>

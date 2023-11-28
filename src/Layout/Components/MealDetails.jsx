@@ -9,13 +9,18 @@ import { useContext, useEffect, useState } from "react";
 import { Authcontext } from "../../providers/Authprovider";
 import Swal from 'sweetalert2'
 import { TbCurrencyTaka } from "react-icons/tb";
+import { GoDotFill } from "react-icons/go";
 
 const MealDetails = () => {
     const { user } = useContext(Authcontext);
     const meal = useLoaderData();
-    const { _id, image, item, type, ingredients, price, rating, like, reviews, post_date, admin, launch, description } = meal;
-    const food_id = _id;
+    var { _id, image, item, type, ingredients, price, rating, like, reviews, post_date, admin, launch, description } = meal;
 
+
+    let userReview = reviews;
+
+    const food_id = _id;
+    console.log(admin)
     const [dbUsers, setdbUsers] = useState([]);
     useEffect(() => {
         fetch('https://hostel-hub-server.vercel.app/user')
@@ -49,6 +54,67 @@ const MealDetails = () => {
             }
         })
     }
+
+    // update like
+    const handleUpdateLike = event => {
+        event.preventDefault();
+        const form = event.target;
+        like = parseInt(form.likes.value) + 1;
+        let launched = "";
+        if (like > 9) {
+            launched = "add";
+        }
+        else {
+            launched = "upcoming";
+        }
+        launch = launched;
+        const updatedApply = { admin, email, item, type, image, ingredients, price, description, post_date, rating, like, reviews, launch };
+
+        fetch(`https://hostel-hub-server.vercel.app/meal/${_id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(updatedApply)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.modifiedCount > 0) {
+                    location.reload();
+                }
+            })
+    }
+
+    // update review
+    const handleUpdateReview = event => {
+        event.preventDefault();
+        const form = event.target;
+
+        let comment = form.review.value;
+        let comments = {
+            reviewer: user?.email,
+            reviewComment: comment
+        };
+        reviews.push(comments)
+        console.log(reviews)
+        const updatedApply = { admin, email, item, type, image, ingredients, price, description, post_date, rating, like, reviews, launch };
+
+        fetch(`https://hostel-hub-server.vercel.app/meal/${_id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(updatedApply)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.modifiedCount > 0) {
+                    location.reload();
+                }
+            })
+    }
     return (
         <div className="">
             <div className="lg:px-32 py-10">
@@ -67,10 +133,17 @@ const MealDetails = () => {
                             <div className="flex">
                                 <p className=" px-5 font-semibold list-disc flex items-center text-blue-600 text-4xl"><TbCurrencyTaka className="text-4xl" />{price}</p>
                                 <p className=" px-5 font-semibold list-disc flex items-center text-red-500"><FaHeart className="text-2xl" />{like}</p>
-                                <p className=" px-5 font-semibold list-disc flex items-center text-purple-600"><MdRateReview className="text-2xl" />{reviews}</p>
                             </div>
+                            <p className="text-2xl font-semibold px-5 flex items-center gap-2 text-purple-600 pt-6 pb-3"><MdRateReview className="text-2xl" />Reviews</p>
+                            <ul>
+                            {
+                                userReview.map(userComment =>
+                                <li key={userReview.reviewer} className=" px-5 font-semibold list-disc flex items-center text-purple-600"><GoDotFill />{userComment.reviewComment}</li>
+                                )
+                            }
+                            </ul>
                             <p className="py-6 px-5 font-semibold list-disc flex items-center ">Post Time: {post_date}</p>
-                            <p className="py-6 px-5 font-semibold list-disc flex items-center ">Description: {description}</p>
+                            <p className="pb-6 px-5 font-semibold list-disc flex items-center ">Description: {description}</p>
                             <div className="flex items-center gap-3">
                                 {
                                     launch != "upcoming" &&
@@ -78,13 +151,17 @@ const MealDetails = () => {
                                         <button onClick={handleMealRequest} className="btn btn-accent ml-5">Request Meal</button>
                                     </div>
                                 }
-                                <textarea className="ml-5 h-10 textarea textarea-primary" placeholder="type here"></textarea>
-                                <button className="btn btn-outline btn-primary">Comment</button>
-                                <button className="btn btn-outline btn-error">Like</button>
-
+                                <form onSubmit={handleUpdateReview}>
+                                    <input type="text" name="review" placeholder="review" className="input input-bordered border-purple-600" />
+                                    <button type="submit" className="btn btn-outline btn-primary ">Comment</button>
+                                </form>
+                                <form onSubmit={handleUpdateLike}>
+                                    <input type="number" name="likes" defaultValue={like} placeholder="like" className="input input-bordered hidden" />
+                                    <button type="submit" className="btn btn-outline btn-error">Like</button>
+                                </form>
                             </div>
                         </div>
-         
+
                     </div>
                 </div>
             </div>

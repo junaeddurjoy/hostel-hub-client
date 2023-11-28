@@ -22,8 +22,8 @@ const AddMeal = () => {
         const description = form.description.value;
         const post_date = form.post_date.value;
         const rating = form.rating.value;
-        const like = form.like.value;
-        const reviews = form.reviews.value;
+        const like = 0;
+        const reviews = [];
         const admin = form.name.value;
         const email = form.email.value;
         const launch = form.launch.value;

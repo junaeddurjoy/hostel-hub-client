@@ -12,10 +12,19 @@ const MyReviews = () => {
 
     const [dbMeal, setdbMeal] = useState([]);
     useEffect(() => {
-        fetch('https://hostel-hub-server.vercel.app/request')
+        fetch('https://hostel-hub-server.vercel.app/meal')
             .then(res => res.json())
             .then(data => setdbMeal(data));
     }, []);
+    let dbRev = '';
+    const matched = dbMeal.map(meal => {
+        const match = meal.reviews.map(revEmail => {
+            if (revEmail.reviewer == user?.email) {
+                dbRev = revEmail.reviewer;
+                console.log(dbRev)
+            }
+        })
+    })
 
     return (
         <div className="w-full flex">
@@ -35,7 +44,7 @@ const MyReviews = () => {
                                 <th className="text-xl font-bold">Meal Title</th>
                                 <th className="text-xl font-bold ">Likes</th>
                                 <th className="text-xl font-bold">Review</th>
-                                <th className="text-xl font-bold  pl-24">Action</th>
+                            
                             </tr>
                         </thead>
                         <tbody>
@@ -43,7 +52,7 @@ const MyReviews = () => {
                                 dbMeal.map(meal =>
                                     <tr key={meal._id}>
                                         {
-                                            meal.email == user?.email &&
+                                            meal.reviews.length != 0 &&
                                             <>
                                                 <td>
                                                     <div className="flex items-center gap-3">
@@ -60,16 +69,23 @@ const MyReviews = () => {
                                                 <td className="text-lg">
                                                     <p className="py-6 px-5 font-semibold list-disc flex items-center text-red-500"><FaHeart className="text-2xl" />{meal.like}</p>
                                                 </td>
-                                                <td className="text-lg">
+                                                {/* <td className="text-lg">
                                                     <p className="py-6 px-5 font-semibold list-disc flex items-center text-purple-600"><MdRateReview className="text-2xl" />{meal.reviews}</p>
-                                                </td>
+                                                </td> */}
                                                 <td>
+                                                    {
+                                                        meal.reviews.map(userComment =>
+                                                            <p key={meal.reviews.reviewer} className=" px-5 font-semibold list-disc flex items-center text-purple-600"><MdRateReview className="text-2xl" />{userComment.reviewComment}</p>
+                                                        )
+                                                    }
+                                                </td>
+                                                {/* <td>
                                                     <div className="join join-vertical lg:join-horizontal">
                                                         <button className="btn join-item text-xl font-semibold bg-purple-500">Edit</button>
                                                         <button className="btn join-item text-xl font-semibold bg-red-500">Delete</button>
                                                         <button className="btn join-item text-xl font-semibold bg-green-500">View</button>
                                                     </div>
-                                                </td>
+                                                </td> */}
                                             </>
                                         }
                                     </tr>)
@@ -78,11 +94,11 @@ const MyReviews = () => {
                     </table>
                 </div>
                 <div className="join w-1/5 ml-96 mt-20">
-                        <button className="join-item btn">1</button>
-                        <button className="join-item btn ">2</button>
-                        <button className="join-item btn">3</button>
-                        <button className="join-item btn">4</button>
-                    </div>
+                    <button className="join-item btn">1</button>
+                    <button className="join-item btn ">2</button>
+                    <button className="join-item btn">3</button>
+                    <button className="join-item btn">4</button>
+                </div>
             </div>
         </div>
     );

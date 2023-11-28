@@ -14,7 +14,7 @@ const AllReviews = () => {
 
     const [dbMeal, setdbMeal] = useState([]);
     useEffect(() => {
-        fetch('https://hostel-hub-server.vercel.app/request')
+        fetch('https://hostel-hub-server.vercel.app/meal')
             .then(res => res.json())
             .then(data => setdbMeal(data));
     }, []);
@@ -33,7 +33,7 @@ const AllReviews = () => {
                 </ul>
             </div>
             <div className="w-5/6">
-                <div className="overflow-x-auto">
+            <div className="overflow-x-auto">
                     <table className="table">
                         {/* head */}
                         <thead>
@@ -41,13 +41,16 @@ const AllReviews = () => {
                                 <th className="text-xl font-bold">Meal Title</th>
                                 <th className="text-xl font-bold ">Likes</th>
                                 <th className="text-xl font-bold">Review</th>
-                                <th className="text-xl font-bold  pl-24">Action</th>
+                            
                             </tr>
                         </thead>
                         <tbody>
                             {
                                 dbMeal.map(meal =>
                                     <tr key={meal._id}>
+                                        {
+                                            meal.reviews.length != 0 &&
+                                            <>
                                                 <td>
                                                     <div className="flex items-center gap-3">
                                                         <div className="avatar">
@@ -63,16 +66,25 @@ const AllReviews = () => {
                                                 <td className="text-lg">
                                                     <p className="py-6 px-5 font-semibold list-disc flex items-center text-red-500"><FaHeart className="text-2xl" />{meal.like}</p>
                                                 </td>
-                                                <td className="text-lg">
+                                                {/* <td className="text-lg">
                                                     <p className="py-6 px-5 font-semibold list-disc flex items-center text-purple-600"><MdRateReview className="text-2xl" />{meal.reviews}</p>
-                                                </td>
+                                                </td> */}
                                                 <td>
+                                                    {
+                                                        meal.reviews.map(userComment =>
+                                                            <p key={meal.reviews.reviewer} className=" px-5 font-semibold list-disc flex items-center text-purple-600"><MdRateReview className="text-2xl" />{userComment.reviewComment}</p>
+                                                        )
+                                                    }
+                                                </td>
+                                                {/* <td>
                                                     <div className="join join-vertical lg:join-horizontal">
                                                         <button className="btn join-item text-xl font-semibold bg-purple-500">Edit</button>
                                                         <button className="btn join-item text-xl font-semibold bg-red-500">Delete</button>
                                                         <button className="btn join-item text-xl font-semibold bg-green-500">View</button>
                                                     </div>
-                                                </td>
+                                                </td> */}
+                                            </>
+                                        }
                                     </tr>)
                             }
                         </tbody>

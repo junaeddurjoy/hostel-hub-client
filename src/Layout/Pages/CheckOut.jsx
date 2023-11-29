@@ -22,7 +22,7 @@ const CheckOut = () => {
     const matched = dbMeal.map(dbFood => {
         const { email } = dbFood;
         if (email == user?.email) {
-            totalPrice = totalPrice + dbFood.price;
+            totalPrice = totalPrice + parseInt(dbFood.price);
         }
     })
 

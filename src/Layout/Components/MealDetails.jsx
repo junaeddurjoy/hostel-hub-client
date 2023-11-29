@@ -64,13 +64,7 @@ const MealDetails = () => {
         if (like > 9) {
             launched = "add";
         }
-        else {
-            launched = "upcoming";
-        }
         launch = launched;
-        // if (admin == null) {
-        //     admin = "admin";
-        // }
         const updatedApply = { admin, email, item, type, image, ingredients, price, description, post_date, rating, like, reviews, launch };
 
         fetch(`https://hostel-hub-server.vercel.app/meal/${_id}`, {
@@ -100,9 +94,6 @@ const MealDetails = () => {
             reviewComment: comment
         };
         reviews.push(comments)
-        // if (admin == null) {
-        //     admin = "admin";
-        // }
         const updatedApply = { admin, email, item, type, image, ingredients, price, description, post_date, rating, like, reviews, launch };
 
         fetch(`https://hostel-hub-server.vercel.app/meal/${_id}`, {

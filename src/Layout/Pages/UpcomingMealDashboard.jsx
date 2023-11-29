@@ -29,7 +29,6 @@ const UpcomingMealDashboard = () => {
             }
         }
         launch = 'add';
-        like=10;
         const updatedApply = { admin, email, item, type, image, ingredients, price, description, post_date, rating, like, reviews, launch };
         fetch(`https://hostel-hub-server.vercel.app/meal/${id}`, {
             method: 'PUT',

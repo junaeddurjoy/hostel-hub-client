@@ -72,23 +72,22 @@ const MyReviews = () => {
                                                 <td className="text-lg">
                                                     <p className="py-6 px-5 font-semibold list-disc flex items-center text-red-500"><FaHeart className="text-2xl" />{meal.like}</p>
                                                 </td>
-                                                {/* <td className="text-lg">
-                                                    <p className="py-6 px-5 font-semibold list-disc flex items-center text-purple-600"><MdRateReview className="text-2xl" />{meal.reviews}</p>
-                                                </td> */}
+                           
                                                 <td>
                                                     {
                                                         meal.reviews.map(userComment =>
-                                                            <p key={meal.reviews.reviewer} className=" px-5 font-semibold list-disc flex items-center text-purple-600"><MdRateReview className="text-2xl" />{userComment.reviewComment}</p>
+                                                            <p key={meal.reviews.reviewer} className=" px-5 font-semibold list-disc flex items-center text-purple-600">
+                                                                {
+                                                                    userComment.reviewer==user?.email &&
+                                                                    <>
+                                                                        <MdRateReview className="text-2xl" />{userComment.reviewComment}
+                                                                    </>
+                                                                }
+                                                            </p>
                                                         )
                                                     }
                                                 </td>
-                                                {/* <td>
-                                                    <div className="join join-vertical lg:join-horizontal">
-                                                        <button className="btn join-item text-xl font-semibold bg-purple-500">Edit</button>
-                                                        <button className="btn join-item text-xl font-semibold bg-red-500">Delete</button>
-                                                        <button className="btn join-item text-xl font-semibold bg-green-500">View</button>
-                                                    </div>
-                                                </td> */}
+
                                             </>
                                         }
                                     </tr>)

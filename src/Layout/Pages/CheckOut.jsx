@@ -20,8 +20,8 @@ const CheckOut = () => {
     }, []);
     let totalPrice = 0;
     const matched = dbMeal.map(dbFood => {
-        const { email } = dbFood;
-        if (email == user?.email) {
+        const { userMail } = dbFood;
+        if (userMail == user?.email) {
             totalPrice = totalPrice + parseInt(dbFood.price);
         }
     })
@@ -81,7 +81,7 @@ const CheckOut = () => {
                                 dbMeal.map(meal =>
                                     <tr key={meal._id}>
                                         {
-                                            meal.email == user?.email &&
+                                            meal.userMail == user?.email &&
                                             <>
 
                                                 <td>
@@ -99,8 +99,12 @@ const CheckOut = () => {
                                                 <td className="text-lg">
                                                     <p className="py-6 px-5 font-semibold list-disc flex items-center text-red-500"><FaHeart className="text-2xl" />{meal.like}</p>
                                                 </td>
-                                                <td className="text-lg">
-                                                    <p className="py-6 px-5 font-semibold list-disc flex items-center text-purple-600"><MdRateReview className="text-2xl" />{meal.reviews}</p>
+                                                <td>
+                                                    {
+                                                        meal.reviews.map(userComment =>
+                                                            <p key={meal.reviews.reviewer} className=" px-5 font-semibold list-disc flex items-center text-purple-600"><MdRateReview className="text-2xl" />{userComment.reviewComment}</p>
+                                                        )
+                                                    }
                                                 </td>
                                                 <td className="text-lg">
                                                     <p className="py-6 px-5 font-semibold list-disc -ml-5">Pending</p>

@@ -28,13 +28,13 @@ const MealDetails = () => {
             .then(data => setdbUsers(data));
     }, []);
 
-    let emails = user?.email;
-    const updatedReqApply = { image, item, type, ingredients, price, rating, like, reviews, email };
+    var userMail = user?.email;
+    const updatedReqApply = { image, item, type, ingredients, price, rating, like, reviews, userMail };
     const handleMealRequest = event => {
         event.preventDefault();
         const matched = dbUsers.map(dbUser => {
-            const { emails } = dbUser;
-            if (emails == user?.email) {
+            const { email } = dbUser;
+            if (email == user?.email) {
                 fetch('https://hostel-hub-server.vercel.app/request', {
                     method: 'POST',
                     headers: {

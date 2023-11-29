@@ -43,7 +43,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/mealdetails/:id",
-        element: <PrivateRoutes><MealDetails></MealDetails></PrivateRoutes>,
+        element: <MealDetails></MealDetails>,
         loader: ({ params }) => fetch(`https://hostel-hub-server.vercel.app/meal/${params.id}`)
       },
       {

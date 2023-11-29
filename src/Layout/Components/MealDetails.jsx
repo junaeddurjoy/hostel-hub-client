@@ -16,11 +16,11 @@ const MealDetails = () => {
     const meal = useLoaderData();
     var { _id, image, item, type, ingredients, price, rating, like, reviews, post_date, admin, launch, description } = meal;
 
-
+    console.log(user);
     let userReview = reviews;
 
     const food_id = _id;
-    console.log(admin)
+
     const [dbUsers, setdbUsers] = useState([]);
     useEffect(() => {
         fetch('https://hostel-hub-server.vercel.app/user')
@@ -79,7 +79,7 @@ const MealDetails = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+              
                 if (data.modifiedCount > 0) {
                     location.reload();
                 }
@@ -97,7 +97,7 @@ const MealDetails = () => {
             reviewComment: comment
         };
         reviews.push(comments)
-        console.log(reviews)
+       
         const updatedApply = { admin, email, item, type, image, ingredients, price, description, post_date, rating, like, reviews, launch };
 
         fetch(`https://hostel-hub-server.vercel.app/meal/${_id}`, {
@@ -109,7 +109,7 @@ const MealDetails = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                
                 if (data.modifiedCount > 0) {
                     location.reload();
                 }
@@ -146,9 +146,14 @@ const MealDetails = () => {
                             <p className="pb-6 px-5 font-semibold list-disc flex items-center ">Description: {description}</p>
                             <div className="flex items-center gap-3">
                                 {
-                                    launch != "upcoming" &&
+                                    launch != "upcoming"  &&
                                     <div>
-                                        <button onClick={handleMealRequest} className="btn btn-accent ml-5">Request Meal</button>
+                                        {
+                                            user?
+                                            <button onClick={handleMealRequest} className="btn btn-accent ml-5">Request Meal</button>
+                                            :
+                                            <button disabled onClick={handleMealRequest} className="btn btn-accent ml-5">Request Meal</button>
+                                        }
                                     </div>
                                 }
                                 <form onSubmit={handleUpdateReview}>

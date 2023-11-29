@@ -1,4 +1,4 @@
-#HOSETEL HUB
+HOSETEL HUB
 project description:
 1. hostel hub is a hostel meal management system
 2. admin can add/delete/update meals here

@@ -153,12 +153,33 @@ const MealDetails = () => {
                                     </div>
                                 }
                                 <form onSubmit={handleUpdateReview}>
-                                    <input type="text" name="review" placeholder="review" className="input input-bordered border-purple-600" />
-                                    <button type="submit" className="btn btn-outline btn-primary ">Comment</button>
+
+                                    {
+                                        user ?
+                                            <>
+                                                <input type="text" name="review" placeholder="review" className="input input-bordered border-purple-600" />
+                                                <button type="submit" className="btn btn-outline btn-primary ">Comment</button>
+                                            </>
+                                            :
+                                            <>
+                                                <input disabled type="text" name="review" placeholder="review" className="input input-bordered border-purple-600" />
+                                                <button disabled type="submit" className="btn btn-outline btn-primary ">Comment</button>
+                                            </>
+                                    }
                                 </form>
                                 <form onSubmit={handleUpdateLike}>
-                                    <input type="number" name="likes" defaultValue={like} placeholder="like" className="input input-bordered hidden" />
-                                    <button type="submit" className="btn btn-outline btn-error">Like</button>
+                                    {
+                                        user ?
+                                            <>
+                                                <input type="number" name="likes" defaultValue={like} placeholder="like" className="input input-bordered hidden" />
+                                                <button type="submit" className="btn btn-outline btn-error">Like</button>
+                                            </>
+                                            :
+                                            <>
+                                                <input type="number" name="likes" defaultValue={like} placeholder="like" className="input input-bordered hidden" />
+                                                <button disabled type="submit" className="btn btn-outline btn-error">Like</button>
+                                            </>
+                                    }
                                 </form>
                             </div>
                         </div>

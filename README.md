@@ -1,8 +1,11 @@
-# React + Vite
+#HOSETEL HUB
+project description:
+1. hostel hub is a hostel meal management system
+2. admin can add/delete/update meals here
+3. users can request meals here from the available options
+4. users can give a like to the meal they love
+5. users can write their reviews for the meal they want
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+client live link: https://hostel-hub-b3ddb.web.app/
+server live link: https://hostel-hub-server.vercel.app

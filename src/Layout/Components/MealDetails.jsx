@@ -14,7 +14,7 @@ import { GoDotFill } from "react-icons/go";
 const MealDetails = () => {
     const { user } = useContext(Authcontext);
     const meal = useLoaderData();
-    var { _id, image, item, type, ingredients, price, rating, like, reviews, post_date, admin, launch, description } = meal;
+    var { _id, admin, image, item, type, ingredients, email, price, rating, like, reviews, post_date, launch, description } = meal;
 
     console.log(user);
     let userReview = reviews;
@@ -28,13 +28,13 @@ const MealDetails = () => {
             .then(data => setdbUsers(data));
     }, []);
 
-    let email = user?.email;
+    let emails = user?.email;
     const updatedReqApply = { image, item, type, ingredients, price, rating, like, reviews, email };
     const handleMealRequest = event => {
         event.preventDefault();
         const matched = dbUsers.map(dbUser => {
-            const { email } = dbUser;
-            if (email == user?.email) {
+            const { emails } = dbUser;
+            if (emails == user?.email) {
                 fetch('https://hostel-hub-server.vercel.app/request', {
                     method: 'POST',
                     headers: {
@@ -68,6 +68,9 @@ const MealDetails = () => {
             launched = "upcoming";
         }
         launch = launched;
+        // if (admin == null) {
+        //     admin = "admin";
+        // }
         const updatedApply = { admin, email, item, type, image, ingredients, price, description, post_date, rating, like, reviews, launch };
 
         fetch(`https://hostel-hub-server.vercel.app/meal/${_id}`, {
@@ -79,7 +82,7 @@ const MealDetails = () => {
         })
             .then(res => res.json())
             .then(data => {
-              
+
                 if (data.modifiedCount > 0) {
                     location.reload();
                 }
@@ -97,7 +100,9 @@ const MealDetails = () => {
             reviewComment: comment
         };
         reviews.push(comments)
-       
+        // if (admin == null) {
+        //     admin = "admin";
+        // }
         const updatedApply = { admin, email, item, type, image, ingredients, price, description, post_date, rating, like, reviews, launch };
 
         fetch(`https://hostel-hub-server.vercel.app/meal/${_id}`, {
@@ -109,7 +114,7 @@ const MealDetails = () => {
         })
             .then(res => res.json())
             .then(data => {
-                
+
                 if (data.modifiedCount > 0) {
                     location.reload();
                 }
@@ -136,23 +141,23 @@ const MealDetails = () => {
                             </div>
                             <p className="text-2xl font-semibold px-5 flex items-center gap-2 text-purple-600 pt-6 pb-3"><MdRateReview className="text-2xl" />Reviews</p>
                             <ul>
-                            {
-                                userReview.map(userComment =>
-                                <li key={userReview.reviewer} className=" px-5 font-semibold list-disc flex items-center text-purple-600"><GoDotFill />{userComment.reviewComment}</li>
-                                )
-                            }
+                                {
+                                    userReview.map(userComment =>
+                                        <li key={userReview.reviewer} className=" px-5 font-semibold list-disc flex items-center text-purple-600"><GoDotFill />{userComment.reviewComment}</li>
+                                    )
+                                }
                             </ul>
                             <p className="py-6 px-5 font-semibold list-disc flex items-center ">Post Time: {post_date}</p>
                             <p className="pb-6 px-5 font-semibold list-disc flex items-center ">Description: {description}</p>
                             <div className="flex items-center gap-3">
                                 {
-                                    launch != "upcoming"  &&
+                                    launch != "upcoming" &&
                                     <div>
                                         {
-                                            user?
-                                            <button onClick={handleMealRequest} className="btn btn-accent ml-5">Request Meal</button>
-                                            :
-                                            <button disabled onClick={handleMealRequest} className="btn btn-accent ml-5">Request Meal</button>
+                                            user ?
+                                                <button onClick={handleMealRequest} className="btn btn-accent ml-5">Request Meal</button>
+                                                :
+                                                <button disabled onClick={handleMealRequest} className="btn btn-accent ml-5">Request Meal</button>
                                         }
                                     </div>
                                 }

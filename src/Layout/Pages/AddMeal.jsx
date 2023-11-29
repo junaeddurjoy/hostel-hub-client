@@ -155,7 +155,7 @@ const AddMeal = () => {
                                     </label>
                                 </div>
                                 {/* 9 */}
-                                <div className="form-control  items-center">
+                                <div className="form-control hidden  items-center">
                                     <label className="label">
                                         <span className="label-text font-bold text-xl">Likes</span>
                                     </label>
@@ -165,7 +165,7 @@ const AddMeal = () => {
                                     </label>
                                 </div>
                                 {/* 9 */}
-                                <div className="form-control  items-center">
+                                <div className="form-control hidden items-center">
                                     <label className="label">
                                         <span className="label-text font-bold text-xl">Reviews</span>
                                     </label>

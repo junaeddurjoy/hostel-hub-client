@@ -27,7 +27,6 @@ const UpdateMeal = () => {
         const post_date = form.post_date.value;
         const rating = form.rating.value;
         const like = form.like.value;
-        const reviews = form.reviews.value;
         const admin = form.name.value;
         const email = form.email.value;
         const launch = form.launch.value;
@@ -206,8 +205,8 @@ const UpdateMeal = () => {
                                     <label className="input-group justify-center">
                                         <span className="mr-3">Add/Upcoming</span>
                                         <select name="launch" defaultValue={launch} className="input input-bordered">
-                                            <option name="add" id="">Add</option>
-                                            <option name="upcoming" id="">Upcoming</option>
+                                            <option name="add" id="">add</option>
+                                            <option name="upcoming" id="">upcoming</option>
                                         </select>
                                     </label>
                                 </div>

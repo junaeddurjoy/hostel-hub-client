@@ -9,6 +9,9 @@ import { MdRateReview } from "react-icons/md";
 import { useContext, useEffect, useState } from "react";
 import { Authcontext } from "../../providers/Authprovider";
 import Swal from 'sweetalert2'
+import { FaAnglesLeft } from "react-icons/fa6";
+import { FaAnglesRight } from "react-icons/fa6";
+
 const RequestedMeals = () => {
     const { user } = useContext(Authcontext);
 
@@ -108,12 +111,14 @@ const RequestedMeals = () => {
                         </tbody>
                     </table>
                 </div>
-                <div className="join w-1/5 ml-96 mt-20">
-                        <button className="join-item btn">1</button>
-                        <button className="join-item btn ">2</button>
-                        <button className="join-item btn">3</button>
-                        <button className="join-item btn">4</button>
-                    </div>
+                <div className="join w-1/5 ml-[420px] mt-20">
+                    <button className="btn btn-square"><FaAnglesLeft /></button>
+                    <input className="join-item btn btn-square" type="radio" name="options" aria-label="1" />
+                    <input className="join-item btn btn-square" type="radio" name="options" aria-label="2" />
+                    <input className="join-item btn btn-square" type="radio" name="options" aria-label="3" />
+                    <input className="join-item btn btn-square" type="radio" name="options" aria-label="4" />
+                    <button className="btn btn-square"><FaAnglesRight /></button>
+                </div>
             </div>
         </div>
     );

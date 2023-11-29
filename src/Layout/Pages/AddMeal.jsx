@@ -202,8 +202,8 @@ const AddMeal = () => {
                                     <label className="input-group justify-center">
                                         <span className="mr-3">Add/Upcoming</span>
                                         <select name="launch" className="input input-bordered">
-                                            <option name="add" id="">Add</option>
-                                            <option name="upcoming" id="">Upcoming</option>
+                                            <option name="add" id="">add</option>
+                                            <option name="upcoming" id="">upcoming</option>
                                         </select>
                                     </label>
                                 </div>

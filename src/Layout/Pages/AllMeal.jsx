@@ -9,6 +9,8 @@ import { MdOutlineUpcoming } from "react-icons/md";
 import { FaHeart } from "react-icons/fa";
 import { MdRateReview } from "react-icons/md";
 import { useEffect, useState } from "react";
+import { FaAnglesLeft } from "react-icons/fa6";
+import { FaAnglesRight } from "react-icons/fa6";
 import Swal from 'sweetalert2'
 const AllMeal = () => {
     const [meals, setMeals] = useState([]);
@@ -105,8 +107,14 @@ const AllMeal = () => {
                                             <td className="text-lg">
                                                 <p className="py-6 px-5 font-semibold list-disc flex items-center text-red-500"><FaHeart className="text-2xl" />{meal.like}</p>
                                             </td>
-                                            <td className="text-lg">
-                                                <p className="py-6 px-5 font-semibold list-disc flex items-center text-purple-600"><MdRateReview className="text-2xl" />{meal.reviews}</p>
+                                            <td>{
+                                                 
+                                                meal.reviews.map(userComment =>
+                                        
+                                                    <p key={meal.reviews.reviewer} className=" px-5 font-semibold list-disc flex items-center text-purple-600"><MdRateReview className="text-2xl" />{userComment.reviewComment} <br /></p>
+                                         
+                                                )
+                                            }
                                             </td>
                                             <td>
                                                 <div className="font-bold text-xl">{meal.admin}</div>
@@ -131,11 +139,13 @@ const AllMeal = () => {
                             </tbody>
                         </table>
                     </div>
-                    <div className="join w-1/5 ml-96 mt-20">
-                        <button className="join-item btn">1</button>
-                        <button className="join-item btn ">2</button>
-                        <button className="join-item btn">3</button>
-                        <button className="join-item btn">4</button>
+                    <div className="join w-1/5 ml-[420px] mt-20">
+                        <button className="btn btn-square"><FaAnglesLeft /></button>
+                        <input className="join-item btn btn-square" type="radio" name="options" aria-label="1" />
+                        <input className="join-item btn btn-square" type="radio" name="options" aria-label="2" />
+                        <input className="join-item btn btn-square" type="radio" name="options" aria-label="3" />
+                        <input className="join-item btn btn-square" type="radio" name="options" aria-label="4" />
+                        <button className="btn btn-square"><FaAnglesRight /></button>
                     </div>
                 </div>
             </div>

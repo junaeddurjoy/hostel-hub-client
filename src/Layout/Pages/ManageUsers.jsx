@@ -107,9 +107,9 @@ const ManageUsers = () => {
                                                 <td>
                                                     <div className="join join-vertical lg:join-horizontal">
                                                         <Link to={`/updateuser/${userDB._id}`}>
-                                                            <button className="btn join-item text-xl font-semibold bg-black text-white">Update User</button>
+                                                            <button className="btn  text-xl font-semibold bg-black text-white">Update User</button>
                                                         </Link>
-                                                        <button onClick={() => handleUpdateUser(userDB._id)} className="btn join-item text-xl font-semibold bg-black text-white">Make Admin</button>
+                                                        <button onClick={() => handleUpdateUser(userDB._id)} className="btn  text-xl font-semibold bg-black text-white">Make Admin</button>
                                                     </div>
                                                 </td>
                                             </>

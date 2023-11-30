@@ -93,7 +93,7 @@ const AllMeal = () => {
                                             key={meal.meal_id}
                                         >
                                             <td>
-                                                <div className="flex items-center gap-3">
+                                                <div className=" items-center gap-3">
                                                     <div className="avatar">
                                                         <div className="mask mask-squircle w-20 h-20">
                                                             <img src={meal.image} alt="Avatar Tailwind CSS Component" />
@@ -125,11 +125,11 @@ const AllMeal = () => {
                                             <td>
                                                 <div className="join join-vertical lg:join-horizontal">
                                                     <Link to={`/updatemeal/${meal._id}`}>
-                                                        <button className="btn join-item text-xl font-semibold bg-purple-500">Update</button>
+                                                        <button className="btn  text-xl font-semibold bg-purple-500">Update</button>
                                                     </Link>
-                                                    <button onClick={() => handleDelete(meal._id)} className="btn join-item text-xl font-semibold bg-red-500">Delete</button>
+                                                    <button onClick={() => handleDelete(meal._id)} className="btn  text-xl font-semibold bg-red-500">Delete</button>
                                                     <Link to={`/mealdetails/${meal._id}`}>
-                                                        <button className="btn join-item text-xl font-semibold bg-green-500">View</button>
+                                                        <button className="btn  text-xl font-semibold bg-green-500">View</button>
                                                     </Link>
 
                                                 </div>

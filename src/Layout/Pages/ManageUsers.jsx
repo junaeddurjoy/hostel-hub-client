@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Link } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { MdOutlineRateReview } from "react-icons/md";
@@ -10,6 +11,7 @@ import { useContext, useEffect, useState } from "react";
 import { Authcontext } from "../../providers/Authprovider";
 import { FaAnglesLeft } from "react-icons/fa6";
 import { FaAnglesRight } from "react-icons/fa6";
+import Swal from 'sweetalert2'
 const ManageUsers = () => {
     const { user } = useContext(Authcontext);
     const [dbUser, setdbUser] = useState([]);
@@ -18,6 +20,46 @@ const ManageUsers = () => {
             .then(res => res.json())
             .then(data => setdbUser(data));
     }, []);
+
+    const handleUpdateUser = id => {
+        let role='';
+        let name='';
+        let email='';
+        let membership= '';
+        const matched = dbUser.map(dbUsers => {
+            role=dbUsers.role;
+            name=dbUsers.name;
+            email=dbUsers.email;
+            membership=dbUsers.membership;
+            const { _id } = dbUsers;
+            if(_id==id){
+                role="admin";
+            }
+        })
+        const updatedApply = { role, name, email, membership };
+        fetch(`https://hostel-hub-server.vercel.app/user/${id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(updatedApply)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.modifiedCount > 0) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'User Updated Successfully',
+                        icon: 'success',
+                        confirmButtonText: 'Cool'
+                        
+                    })
+                    location.reload();
+                    console.log('updated');
+                }
+            })
+    }
     return (
         <div>
             <div className="w-full flex">
@@ -67,7 +109,7 @@ const ManageUsers = () => {
                                                         <Link to={`/updateuser/${userDB._id}`}>
                                                             <button className="btn join-item text-xl font-semibold bg-black text-white">Update User</button>
                                                         </Link>
-
+                                                        <button onClick={() => handleUpdateUser(userDB._id)} className="btn join-item text-xl font-semibold bg-black text-white">Make Admin</button>
                                                     </div>
                                                 </td>
                                             </>
